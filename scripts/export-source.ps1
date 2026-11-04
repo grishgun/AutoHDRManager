@@ -15,7 +15,7 @@ foreach ($name in @('src','tests','scripts','.github','docs\licenses','docs\scre
     $files += Get-ChildItem -LiteralPath (Join-Path $projectRoot $name) -File -Recurse -Force | Where-Object {
         $_.FullName -notmatch '\\(bin|obj|TestResults|Covers|Logs|Launcher|Shortcuts)\\' -and
         $_.Name -notmatch '^(settings|games|session)\.json|^cover-key\.bin$' -and
-        $_.Extension -in @('.cs','.csproj','.xaml','.resx','.manifest','.png','.ico','.md','.txt','.ps1','.yml','.yaml')
+        ($_.Extension -in @('.cs','.csproj','.xaml','.resx','.manifest','.png','.ico','.md','.txt','.ps1','.yml','.yaml') -or $_.Name -eq 'LICENSE')
     }
 }
 foreach ($file in $files) {
