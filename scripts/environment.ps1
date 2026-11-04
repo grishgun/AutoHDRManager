@@ -1,0 +1,11 @@
+$ErrorActionPreference = 'Stop'
+$ProjectRoot = Split-Path -Parent $PSScriptRoot
+$env:DOTNET_CLI_HOME = Join-Path $ProjectRoot '.tools\cli'
+$env:DOTNET_SKIP_FIRST_TIME_EXPERIENCE = '1'
+$env:DOTNET_CLI_TELEMETRY_OPTOUT = '1'
+$env:DOTNET_ADD_GLOBAL_TOOLS_TO_PATH = '0'
+$env:DOTNET_GENERATE_ASPNET_CERTIFICATE = 'false'
+$env:NUGET_PACKAGES = Join-Path $ProjectRoot '.tools\nuget'
+$localDotnet = Join-Path $ProjectRoot '.tools\dotnet\dotnet.exe'
+$Dotnet = if (Test-Path -LiteralPath $localDotnet) { $localDotnet } else { (Get-Command dotnet -ErrorAction Stop).Source }
+$env:DOTNET_ROOT = Split-Path -Parent $Dotnet

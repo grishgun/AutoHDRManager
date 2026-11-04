@@ -1,0 +1,4 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><TargetFramework>net10.0-windows10.0.26100.0</TargetFramework><SupportedOSPlatformVersion>10.0.22000.0</SupportedOSPlatformVersion><OutputType>WinExe</OutputType></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../../src/AutoHDRManager.Windows/AutoHDRManager.Windows.csproj" /></ItemGroup>
+</Project>

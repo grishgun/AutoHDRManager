@@ -1,0 +1,692 @@
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <data name="LibraryTitle" xml:space="preserve">
+    <value>Game library</value>
+  </data>
+  <data name="LibrarySubtitle" xml:space="preserve">
+    <value>Automatic HDR for your selected games</value>
+  </data>
+  <data name="Library" xml:space="preserve">
+    <value>Library</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Diagnostics" xml:space="preserve">
+    <value>Diagnostics</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="AddGame" xml:space="preserve">
+    <value>Add game</value>
+  </data>
+  <data name="FromRunning" xml:space="preserve">
+    <value>From running apps</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search games</value>
+  </data>
+  <data name="Grid" xml:space="preserve">
+    <value>Grid</value>
+  </data>
+  <data name="List" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="EmptyTitle" xml:space="preserve">
+    <value>Your library is empty</value>
+  </data>
+  <data name="EmptyBody" xml:space="preserve">
+    <value>Add a game's EXE. The manager enables HDR before launch and restores the original state when you exit.</value>
+  </data>
+  <data name="NoResults" xml:space="preserve">
+    <value>No games found</value>
+  </data>
+  <data name="Monitor" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="Monitoring" xml:space="preserve">
+    <value>Monitoring</value>
+  </data>
+  <data name="Launch" xml:space="preserve">
+    <value>Launch with HDR</value>
+  </data>
+  <data name="GameActions" xml:space="preserve">
+    <value>Game actions</value>
+  </data>
+  <data name="GameCover" xml:space="preserve">
+    <value>Game cover</value>
+  </data>
+  <data name="Shortcut" xml:space="preserve">
+    <value>Create HDR shortcut</value>
+  </data>
+  <data name="Pin" xml:space="preserve">
+    <value>Pin HDR launch to taskbar</value>
+  </data>
+  <data name="EditGame" xml:space="preserve">
+    <value>Game settings</value>
+  </data>
+  <data name="ChangeCover" xml:space="preserve">
+    <value>Change cover</value>
+  </data>
+  <data name="FindCover" xml:space="preserve">
+    <value>Find on SteamGridDB</value>
+  </data>
+  <data name="OpenExe" xml:space="preserve">
+    <value>Open EXE location</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove from library</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="Startup" xml:space="preserve">
+    <value>Start with Windows</value>
+  </data>
+  <data name="StartMinimized" xml:space="preserve">
+    <value>Start in system tray</value>
+  </data>
+  <data name="CloseToTray" xml:space="preserve">
+    <value>Minimize to tray when closing</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Show notifications</value>
+  </data>
+  <data name="Automatic" xml:space="preserve">
+    <value>Automatic HDR management</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Suspended" xml:space="preserve">
+    <value>Paused</value>
+  </data>
+  <data name="TargetDisplay" xml:space="preserve">
+    <value>Target display</value>
+  </data>
+  <data name="EnableDelay" xml:space="preserve">
+    <value>Detection delay, seconds</value>
+  </data>
+  <data name="EnableDelayHelp" xml:space="preserve">
+    <value>Launching through the manager enables HDR immediately, then waits 1 second before starting the game.</value>
+  </data>
+  <data name="RestoreDelay" xml:space="preserve">
+    <value>Restore delay, seconds</value>
+  </data>
+  <data name="CheckHdr" xml:space="preserve">
+    <value>Check HDR availability</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="SystemLanguage" xml:space="preserve">
+    <value>System / Системный</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Library view</value>
+  </data>
+  <data name="Covers" xml:space="preserve">
+    <value>Covers</value>
+  </data>
+  <data name="CoversInfo" xml:space="preserve">
+    <value>Choose a portrait PNG, JPG or WEBP using Change cover in the game menu (···). Games without cover art use their original icon. SteamGridDB is an optional source.</value>
+  </data>
+  <data name="OnlineCovers" xml:space="preserve">
+    <value>Search SteamGridDB when adding games</value>
+  </data>
+  <data name="ApiKey" xml:space="preserve">
+    <value>SteamGridDB API key (optional)</value>
+  </data>
+  <data name="KeepKey" xml:space="preserve">
+    <value>Leave blank to keep your existing key</value>
+  </data>
+  <data name="CoverPrivacy" xml:space="preserve">
+    <value>Search sends the game's name to SteamGridDB. Windows protects your key for the current user. Covers are stored locally.</value>
+  </data>
+  <data name="ApiDocs" xml:space="preserve">
+    <value>Get a SteamGridDB key</value>
+  </data>
+  <data name="RemoveKey" xml:space="preserve">
+    <value>Remove saved key</value>
+  </data>
+  <data name="RefreshCovers" xml:space="preserve">
+    <value>Refresh covers</value>
+  </data>
+  <data name="ClearIcons" xml:space="preserve">
+    <value>Clear icon cache</value>
+  </data>
+  <data name="OpenLogs" xml:space="preserve">
+    <value>Open logs</value>
+  </data>
+  <data name="CopyReport" xml:space="preserve">
+    <value>Copy report</value>
+  </data>
+  <data name="DiagnosticsInfo" xml:space="preserve">
+    <value>The check only reads display state. The report excludes game paths and keys.</value>
+  </data>
+  <data name="LastError" xml:space="preserve">
+    <value>Last error</value>
+  </data>
+  <data name="NoError" xml:space="preserve">
+    <value>No errors recorded</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save settings</value>
+  </data>
+  <data name="Attention" xml:space="preserve">
+    <value>Needs attention</value>
+  </data>
+  <data name="AboutVersion" xml:space="preserve">
+    <value>Version 1.2.3 · Windows 11 x64</value>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>HDR when your game needs it</value>
+  </data>
+  <data name="AboutBody" xml:space="preserve">
+    <value>Add the actual game EXE. Launching through the manager or an HDR shortcut enables HDR before the game process starts. Monitoring detects ordinary launches.</value>
+  </data>
+  <data name="AboutOwnership" xml:space="preserve">
+    <value>A manual HDR change pauses automatic control. After a crash, the app preserves state that the user may have changed.</value>
+  </data>
+  <data name="AboutScope" xml:space="preserve">
+    <value>This manages Windows HDR, not the Auto HDR gaming feature or NVIDIA RTX HDR. Closing the window can hide it in the tray; use Exit to quit.</value>
+  </data>
+  <data name="AboutPrivacy" xml:space="preserve">
+    <value>Data stays on your PC. Logs are never uploaded automatically.</value>
+  </data>
+  <data name="DataFolder" xml:space="preserve">
+    <value>Open data folder</value>
+  </data>
+  <data name="LicensePending" xml:space="preserve">
+    <value>Free project. An open-source license will be selected before publication.</value>
+  </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>The action could not be completed. Details are available in the local diagnostic log.</value>
+  </data>
+  <data name="MonitorDetails" xml:space="preserve">
+    <value>HDR support: {0} · State: {1}</value>
+  </data>
+  <data name="PinInstructions" xml:space="preserve">
+    <value>Right-click the selected shortcut → Pin to taskbar. If needed, choose Show more options. Windows handles pinning; it has not been confirmed yet.</value>
+  </data>
+  <data name="ShortcutCreated" xml:space="preserve">
+    <value>HDR shortcut created</value>
+  </data>
+  <data name="TrayTip" xml:space="preserve">
+    <value>Auto HDR Manager
+HDR: {0}
+Monitoring: {1}</value>
+  </data>
+  <data name="IpcFailure" xml:space="preserve">
+    <value>Could not send the request to the running Auto HDR Manager. Exit the old version from the tray and open the new one.</value>
+  </data>
+  <data name="Файлы игры останутся на диске." xml:space="preserve">
+    <value>Game files will remain on disk.</value>
+  </data>
+  <data name="Открыть расположение" xml:space="preserve">
+    <value>Open location</value>
+  </data>
+  <data name="Закрыть" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Ярлыки требуют внимания" xml:space="preserve">
+    <value>Shortcuts need attention</value>
+  </data>
+  <data name="Игра не запущена" xml:space="preserve">
+    <value>Game was not launched</value>
+  </data>
+  <data name="Показать системные процессы" xml:space="preserve">
+    <value>Show system processes</value>
+  </data>
+  <data name="Поиск по названию или пути" xml:space="preserve">
+    <value>Search by name or path</value>
+  </data>
+  <data name="Выберите игровой процесс, а не Steam или другой лаунчер." xml:space="preserve">
+    <value>Choose the game process, rather than Steam or another launcher.</value>
+  </data>
+  <data name="Из запущенных процессов" xml:space="preserve">
+    <value>From running processes</value>
+  </data>
+  <data name="Добавить" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Отмена" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Путь процесса недоступен. Выберите его EXE вручную." xml:space="preserve">
+    <value>The process path is unavailable. Select its EXE manually.</value>
+  </data>
+  <data name="Путь недоступен" xml:space="preserve">
+    <value>Path unavailable</value>
+  </data>
+  <data name="Удалить из библиотеки?" xml:space="preserve">
+    <value>Remove from library?</value>
+  </data>
+  <data name="Удалить" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Название" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Фактический EXE для отслеживания" xml:space="preserve">
+    <value>Actual EXE to monitor</value>
+  </data>
+  <data name="Выбрать EXE" xml:space="preserve">
+    <value>Choose EXE</value>
+  </data>
+  <data name="Способ запуска" xml:space="preserve">
+    <value>Launch method</value>
+  </data>
+  <data name="Прямой EXE" xml:space="preserve">
+    <value>Direct EXE</value>
+  </data>
+  <data name="Пользовательская команда" xml:space="preserve">
+    <value>Custom command</value>
+  </data>
+  <data name="URI платформы" xml:space="preserve">
+    <value>Platform URI</value>
+  </data>
+  <data name="EXE команды или URI (например steam://rungameid/…)" xml:space="preserve">
+    <value>Command EXE or URI (e.g. steam://rungameid/…)</value>
+  </data>
+  <data name="Аргументы команды / EXE" xml:space="preserve">
+    <value>Command / EXE arguments</value>
+  </data>
+  <data name="Настройки игры" xml:space="preserve">
+    <value>Game settings</value>
+  </data>
+  <data name="Сохранить" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Настройки сохранены." xml:space="preserve">
+    <value>Settings saved.</value>
+  </data>
+  <data name="API-ключ удалён." xml:space="preserve">
+    <value>API key removed.</value>
+  </data>
+  <data name="Обложка из SteamGridDB" xml:space="preserve">
+    <value>Cover from SteamGridDB</value>
+  </data>
+  <data name="Загрузить" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="Оставить иконку" xml:space="preserve">
+    <value>Keep icon</value>
+  </data>
+  <data name="Отчёт скопирован. Личные пути не включены." xml:space="preserve">
+    <value>Report copied. Personal paths are excluded.</value>
+  </data>
+  <data name="HDR не восстановлен" xml:space="preserve">
+    <value>HDR was not restored</value>
+  </data>
+  <data name="Не удалось подтвердить восстановление. Журнал сессии сохранён." xml:space="preserve">
+    <value>Restoration could not be confirmed. The session journal was preserved.</value>
+  </data>
+  <data name="Запущена  ·  HDR" xml:space="preserve">
+    <value>Running  ·  HDR</value>
+  </data>
+  <data name="Не запущена  ·  HDR" xml:space="preserve">
+    <value>HDR</value>
+  </data>
+  <data name="Проверка…" xml:space="preserve">
+    <value>Checking…</value>
+  </data>
+  <data name="Нет" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="Ожидание" xml:space="preserve">
+    <value>Waiting</value>
+  </data>
+  <data name="Активен" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Приостановлен" xml:space="preserve">
+    <value>Paused</value>
+  </data>
+  <data name="Приостановить" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="Возобновить" xml:space="preserve">
+    <value>Resume</value>
+  </data>
+  <data name="Недоступен" xml:space="preserve">
+    <value>Unavailable</value>
+  </data>
+  <data name="Включён" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="Выключен" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="Готов к запуску игр" xml:space="preserve">
+    <value>Ready to launch</value>
+  </data>
+  <data name="Игра обнаружена" xml:space="preserve">
+    <value>Game detected</value>
+  </data>
+  <data name="Ожидание перед включением HDR" xml:space="preserve">
+    <value>Waiting to enable HDR</value>
+  </data>
+  <data name="Включение HDR" xml:space="preserve">
+    <value>Enabling HDR</value>
+  </data>
+  <data name="Игровая HDR-сессия" xml:space="preserve">
+    <value>HDR gaming session</value>
+  </data>
+  <data name="Ожидание завершения сессии" xml:space="preserve">
+    <value>Waiting to restore</value>
+  </data>
+  <data name="Восстановление HDR" xml:space="preserve">
+    <value>Restoring HDR</value>
+  </data>
+  <data name="HDR изменён вручную — управление приостановлено до выхода из игр" xml:space="preserve">
+    <value>HDR changed manually — control paused until games exit</value>
+  </data>
+  <data name="Мониторинг приостановлен" xml:space="preserve">
+    <value>Monitoring paused</value>
+  </data>
+  <data name="Ошибка управления HDR" xml:space="preserve">
+    <value>HDR control error</value>
+  </data>
+  <data name="Активный монитор не найден." xml:space="preserve">
+    <value>No active display found.</value>
+  </data>
+  <data name="Открыть Auto HDR Manager" xml:space="preserve">
+    <value>Open Auto HDR Manager</value>
+  </data>
+  <data name="Приостановить мониторинг" xml:space="preserve">
+    <value>Pause monitoring</value>
+  </data>
+  <data name="Возобновить мониторинг" xml:space="preserve">
+    <value>Resume monitoring</value>
+  </data>
+  <data name="Выход" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="HDR включён" xml:space="preserve">
+    <value>HDR enabled</value>
+  </data>
+  <data name="Игровая сессия активна." xml:space="preserve">
+    <value>Gaming session is active.</value>
+  </data>
+  <data name="HDR восстановлен" xml:space="preserve">
+    <value>HDR restored</value>
+  </data>
+  <data name="Исходный режим HDR." xml:space="preserve">
+    <value>Original HDR mode.</value>
+  </data>
+  <data name="Исходный режим SDR." xml:space="preserve">
+    <value>Original SDR mode.</value>
+  </data>
+  <data name="Ошибка HDR" xml:space="preserve">
+    <value>HDR error</value>
+  </data>
+  <data name="Найдена незавершённая сессия. Состояние HDR сохранено: изменения во время перерыва неизвестны." xml:space="preserve">
+    <value>An unfinished session was found. HDR was preserved because changes during the interruption are unknown.</value>
+  </data>
+  <data name="Активный дисплей не найден." xml:space="preserve">
+    <value>No active display found.</value>
+  </data>
+  <data name="Выбранный дисплей не поддерживает управление HDR." xml:space="preserve">
+    <value>The selected display does not support HDR control.</value>
+  </data>
+  <data name="Обнаружено внешнее изменение HDR. Автоматическое управление остановлено до завершения сессии." xml:space="preserve">
+    <value>An external HDR change was detected. Automatic control is paused until the session ends.</value>
+  </data>
+  <data name="Windows не подтвердила запрошенный режим HDR." xml:space="preserve">
+    <value>Windows did not confirm the requested HDR state.</value>
+  </data>
+  <data name="Сначала возобновите автоматическое управление HDR." xml:space="preserve">
+    <value>Resume automatic HDR control first.</value>
+  </data>
+  <data name="Дождитесь первой проверки состояния HDR." xml:space="preserve">
+    <value>Wait for the initial HDR state check.</value>
+  </data>
+  <data name="HDR переопределён вручную. Дождитесь завершения текущей сессии." xml:space="preserve">
+    <value>HDR was changed manually. Wait for the current session to end.</value>
+  </data>
+  <data name="Windows не подтвердила активный HDR. Игра не запущена." xml:space="preserve">
+    <value>Windows did not confirm active HDR. The game was not launched.</value>
+  </data>
+  <data name="HDR-запуск отменён. Возобновите мониторинг и повторите запуск." xml:space="preserve">
+    <value>HDR launch was cancelled. Resume monitoring and try again.</value>
+  </data>
+  <data name="HDR изменился перед запуском. Игра не запущена." xml:space="preserve">
+    <value>HDR changed before launch. The game was not started.</value>
+  </data>
+  <data name="Игра удалена из библиотеки. Создайте ярлык заново для нужной игры." xml:space="preserve">
+    <value>The game was removed from the library. Create a shortcut for the correct game.</value>
+  </data>
+  <data name="Ожидается --launch-game &lt;GameId в формате GUID&gt;." xml:space="preserve">
+    <value>Expected --launch-game &lt;GameId as a GUID&gt;.</value>
+  </data>
+  <data name="Конфигурация дисплеев меняется. Повторите проверку позже." xml:space="preserve">
+    <value>The display configuration is changing or unavailable. Try again later.</value>
+  </data>
+  <data name="Целевой монитор отключён или изменился." xml:space="preserve">
+    <value>The target display was disconnected or changed.</value>
+  </data>
+  <data name="Переключение HDR на этом мониторе недоступно." xml:space="preserve">
+    <value>HDR switching is unavailable on this display.</value>
+  </data>
+  <data name="HDR не подтвердился после ограниченного ожидания стабилизации дисплея." xml:space="preserve">
+    <value>HDR was not confirmed within the display stabilization timeout.</value>
+  </data>
+  <data name="Эта игра уже есть в библиотеке." xml:space="preserve">
+    <value>This game is already in the library.</value>
+  </data>
+  <data name="Дождитесь завершения игры, чтобы удалить её из отслеживания." xml:space="preserve">
+    <value>Wait for the game to exit before removing it.</value>
+  </data>
+  <data name="Изменить EXE можно после завершения игры." xml:space="preserve">
+    <value>The EXE can be changed after the game exits.</value>
+  </data>
+  <data name="Режим проверки --safe запрещает изменение автозапуска." xml:space="preserve">
+    <value>Safe mode prevents changes to Windows startup.</value>
+  </data>
+  <data name="Изменить монитор можно после завершения HDR-сессии." xml:space="preserve">
+    <value>The display can be changed after the HDR session ends.</value>
+  </data>
+  <data name="Режим --safe: автоматическое управление отключено для проверки интерфейса." xml:space="preserve">
+    <value>Safe mode: automatic HDR control is disabled for UI testing.</value>
+  </data>
+  <data name="Режим --safe запрещает переключение HDR." xml:space="preserve">
+    <value>Safe mode prevents HDR changes.</value>
+  </data>
+  <data name="Для SteamGridDB нужен API-ключ. Локальные обложки работают без него." xml:space="preserve">
+    <value>SteamGridDB requires an API key. Local covers work without one.</value>
+  </data>
+  <data name="Выберите изображение размером до 10 МБ." xml:space="preserve">
+    <value>Choose an image up to 10 MB.</value>
+  </data>
+  <data name="Поддерживаются PNG, JPG и WEBP." xml:space="preserve">
+    <value>PNG, JPG and WEBP are supported.</value>
+  </data>
+  <data name="Изображение слишком большое (максимум 32 мегапикселя)." xml:space="preserve">
+    <value>The image is too large (maximum 32 megapixels).</value>
+  </data>
+  <data name="SteamGridDB отклонил API-ключ. Проверьте ключ в настройках." xml:space="preserve">
+    <value>SteamGridDB rejected the API key. Check the key in settings.</value>
+  </data>
+  <data name="У этой игры пока нет подходящей обложки." xml:space="preserve">
+    <value>No suitable cover is available for this game yet.</value>
+  </data>
+  <data name="Неожиданный адрес изображения SteamGridDB." xml:space="preserve">
+    <value>Unexpected SteamGridDB image address.</value>
+  </data>
+  <data name="Неожиданный формат изображения." xml:space="preserve">
+    <value>Unexpected image format.</value>
+  </data>
+  <data name="Ответ сервера превышает допустимый размер." xml:space="preserve">
+    <value>The server response exceeds the size limit.</value>
+  </data>
+  <data name="Ответ сервера слишком большой." xml:space="preserve">
+    <value>The server response is too large.</value>
+  </data>
+  <data name="Игра" xml:space="preserve">
+    <value>Game</value>
+  </data>
+  <data name="Папка не найдена." xml:space="preserve">
+    <value>Folder not found.</value>
+  </data>
+  <data name="Portable EXE не найден." xml:space="preserve">
+    <value>Portable EXE not found.</value>
+  </data>
+  <data name="Создание ярлыков доступно из опубликованного portable EXE." xml:space="preserve">
+    <value>Shortcut creation requires the published portable EXE.</value>
+  </data>
+  <data name="Не удалось обновить служебный EXE. Завершите Auto HDR Manager через трей и откройте новую portable-версию ещё раз. Закреплённые значки сохранятся." xml:space="preserve">
+    <value>Could not update the launcher. Exit Auto HDR Manager from the tray and open the new portable version again. Pinned icons will remain.</value>
+  </data>
+  <data name="Windows перенаправила папку приложения в другой профиль или контейнер. Завершите Auto HDR Manager и запустите portable EXE из Проводника, затем создайте ярлык снова." xml:space="preserve">
+    <value>Windows redirected the app folder to another profile or container. Exit Auto HDR Manager, open the portable EXE from File Explorer and create the shortcut again.</value>
+  </data>
+  <data name="Исполняемый файл команды запуска не найден." xml:space="preserve">
+    <value>Launch command executable not found.</value>
+  </data>
+  <data name="Разрешены URI Steam, Epic Games и GOG Galaxy." xml:space="preserve">
+    <value>Steam, Epic Games and GOG Galaxy URIs are supported.</value>
+  </data>
+  <data name="Не удалось передать команду запуска Windows." xml:space="preserve">
+    <value>Could not pass the launch command to Windows.</value>
+  </data>
+  <data name="Выберите исполняемый файл EXE." xml:space="preserve">
+    <value>Select an EXE executable.</value>
+  </data>
+  <data name="EXE игры не найден." xml:space="preserve">
+    <value>Game EXE not found.</value>
+  </data>
+  <data name="Данные созданы более новой версией Auto HDR Manager. Обновите приложение." xml:space="preserve">
+    <value>Data was created by a newer Auto HDR Manager version. Update the app.</value>
+  </data>
+  <data name="Licenses">
+    <value>Component licenses</value>
+  </data>
+  <data name="ShortcutDescription">
+    <value> — HDR before game launch</value>
+  </data>
+  <data name="HDR-дисплей не найден.">
+    <value>No HDR display was found.</value>
+  </data>
+  <data name="Не удалось создать обработчик трея.">
+    <value>The tray handler could not be created.</value>
+  </data>
+  <data name="Неверное выравнивание DisplayConfig.">
+    <value>Invalid DisplayConfig structure alignment.</value>
+  </data>
+  <data name="Неверные данные JSON.">
+    <value>Invalid JSON data.</value>
+  </data>
+  <data name="Неверные данные для сохранения.">
+    <value>The data cannot be saved because it is invalid.</value>
+  </data>
+  <data name="Некорректный размер конфигурации дисплеев.">
+    <value>Invalid display configuration size.</value>
+  </data>
+  <data name="Несовместимая разметка структур DisplayConfig.">
+    <value>Incompatible DisplayConfig structure layout.</value>
+  </data>
+  <data name="Пустой JSON.">
+    <value>The JSON file is empty.</value>
+  </data>
+  <data name="Путь к приложению неизвестен.">
+    <value>The application path is unavailable.</value>
+  </data>
+  <data name="Целевой монитор не поддерживает HDR.">
+    <value>The selected display does not support HDR.</value>
+  </data>
+  <data name="GroupingTitle">
+    <value>Taskbar grouping diagnostics</value>
+  </data>
+  <data name="GroupingPickWindow">
+    <value>Running game window</value>
+  </data>
+  <data name="GroupingSelectHelp">
+    <value>Select the game window. The launcher and game may use different EXEs. This check only reads data; it does not modify shortcuts or windows.</value>
+  </data>
+  <data name="GroupingCopy">
+    <value>Copy including paths</value>
+  </data>
+  <data name="GroupingRefresh">
+    <value>Read window again</value>
+  </data>
+  <data name="GroupingExpectedId">
+    <value>HDR launch identity</value>
+  </data>
+  <data name="GroupingNoShortcut">
+    <value>No generated HDR shortcut was found for this game.</value>
+  </data>
+  <data name="GroupingShortcut">
+    <value>HDR shortcut</value>
+  </data>
+  <data name="GroupingUnavailable">
+    <value>Unavailable</value>
+  </data>
+  <data name="GroupingAbsent">
+    <value>Not set</value>
+  </data>
+  <data name="GroupingExplicitFound">
+    <value>An explicit window ID was read. Matching shortcut and window IDs is the basis for grouping, but does not itself verify the taskbar result. No automatic replacement is performed.</value>
+  </data>
+  <data name="GroupingNoReadableId">
+    <value>No explicit window ID was read. This does not prove the absence of a process-level Shell ID. Grouping cannot be guaranteed without a confirmed compatible ID.</value>
+  </data>
+  <data name="GroupingProcessLimit">
+    <value>The documented getter for an explicit process Shell ID only reads the calling process. Windows-generated internal IDs cannot be retrieved. GetApplicationUserModelId reports application identity, not necessarily a desktop process Shell ID.</value>
+  </data>
+  <data name="GroupingWindowGone">
+    <value>The window exited or its identity was reused. Reopen diagnostics.</value>
+  </data>
+  <data name="GroupingReadFailed">
+    <value>The window could not be read again. No identities were changed.</value>
+  </data>
+  <data name="GroupingCopied">
+    <value>Copied. The report includes paths and the selected window title; review it before sharing.</value>
+  </data>
+  <data name="GameIcon" xml:space="preserve"><value>Game icon</value></data>
+  <data name="ChooseCover" xml:space="preserve"><value>Choose cover</value></data>
+  <data name="RunningBadge" xml:space="preserve"><value>Running</value></data>
+  <data name="AppMenu" xml:space="preserve"><value>More options</value></data>
+  <data name="SettingsSubtitle" xml:space="preserve"><value>Make HDR fit the way you play.</value></data>
+  <data name="AutomaticHelp" xml:space="preserve"><value>Watch your library and manage HDR during game sessions.</value></data>
+  <data name="StartupHelp" xml:space="preserve"><value>Open Auto HDR Manager when you sign in.</value></data>
+  <data name="StartMinimizedHelp" xml:space="preserve"><value>Start in the notification area, without opening a window.</value></data>
+  <data name="CloseToTrayHelp" xml:space="preserve"><value>Keep managing HDR after you close the window.</value></data>
+  <data name="NotificationsHelp" xml:space="preserve"><value>Show HDR changes and game session events.</value></data>
+  <data name="ThemeHelp" xml:space="preserve"><value>Follow Windows, or choose a light or dark appearance.</value></data>
+  <data name="LanguageHelp" xml:space="preserve"><value>Applies immediately and is remembered.</value></data>
+  <data name="ViewHelp" xml:space="preserve"><value>Portrait covers or a compact game list.</value></data>
+</root>
