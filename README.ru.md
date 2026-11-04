@@ -97,6 +97,8 @@
 
 Результат: `dist/AutoHDRManager.exe`. Скрипт запускает Core/Windows-тесты и проверяет single-file publish. Параметр `-Headless` пропускает только чтение физического дисплея для CI и не переключает HDR. Для релиза локально прошли **86 тестов**: 63 Core + 23 Windows, без пропусков. GitHub Actions собирает артефакты, но не публикует Release автоматически. [Сборка](docs/BUILD-ENVIRONMENT.md) · [Архитектура](docs/ARCHITECTURE.md) · [Участие в проекте](CONTRIBUTING.md).
 
+GitHub Actions на Windows Server дополнительно использует `-WithoutWebpCodec`: там системный WEBP-декодер не инициализируется (0x88982F8B). В CI запускаются 84 теста; чтение физического дисплея и один WEBP-сценарий исключены явно. Локально перед релизом прошли все 86. Поддержка WEBP в приложении зависит от установленного системного декодера Windows; PNG/JPG остаются доступны.
+
 ## Лицензия
 
 Собственные исходники, документация, логотип и демонстрационная графика: **[MIT](LICENSE)**, copyright (c) 2026 grishgun. У зависимостей отдельные лицензии: [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), [BINARY-TERMS.md](BINARY-TERMS.md). Проект не связан с Microsoft, Valve или издателями игр.

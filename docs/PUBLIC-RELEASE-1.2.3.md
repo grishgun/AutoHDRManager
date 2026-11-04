@@ -28,3 +28,6 @@ A disconnected display or a manual HDR change can end session ownership. Driver/
 - Real HDR switching and game launches were not repeated during publication preparation. No clean-machine or broad hardware compatibility claim is made.
 
 [English guide](../README.md) · [Русская инструкция](../README.ru.md) · [Dependency notices](../THIRD-PARTY-NOTICES.md)
+
+
+Windows Server GitHub Actions also uses `-WithoutWebpCodec` because its system WEBP decoder fails to initialize (0x88982F8B). CI runs 84 cases with two explicit exclusions: physical-display reading and one WEBP integration case. All 86 passed locally before release. Application WEBP support depends on an installed working Windows system decoder; PNG/JPG remain available.

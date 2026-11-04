@@ -11,3 +11,6 @@ The portable publish uses SelfContained, WindowsAppSDKSelfContained, PublishSing
 A network-enabled restore and vulnerability check succeeded for public 1.2.3 preparation. No vulnerable application packages were reported at that time. A clean Windows VM has not been tested.
 
 For GUI checks, use `--safe --ui-test-root <absolute-path>` with fictional data. Safe mode forbids HDR writes. Never use production settings, logs, extracted game icons or copyrighted covers for public screenshots. `scripts/export-source.ps1` uses an allowlist to exclude runtime state and private validation artifacts.
+
+
+Windows Server GitHub Actions also uses `-WithoutWebpCodec` because its system WEBP decoder fails to initialize (0x88982F8B). CI runs 84 cases with two explicit exclusions: physical-display reading and one WEBP integration case. All 86 passed locally before release. Application WEBP support depends on an installed working Windows system decoder; PNG/JPG remain available.

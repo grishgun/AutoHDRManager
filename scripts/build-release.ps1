@@ -1,4 +1,4 @@
-param([switch]$SkipTests, [switch]$Headless)
+param([switch]$SkipTests, [switch]$Headless, [switch]$WithoutWebpCodec)
 . (Join-Path $PSScriptRoot 'environment.ps1')
 Push-Location $ProjectRoot
 try {
@@ -6,7 +6,13 @@ try {
         & $Dotnet test tests\AutoHDRManager.Tests -c Release --logger 'trx;LogFileName=unit.trx' --results-directory artifacts\tests
         if ($LASTEXITCODE -ne 0) { throw 'Unit tests failed.' }
         $testArguments = @('test', 'tests\AutoHDRManager.Windows.Tests', '-c', 'Release', '--logger', 'trx;LogFileName=windows.trx', '--results-directory', 'artifacts\tests')
-        if ($Headless) { $testArguments += @('--filter', 'FullyQualifiedName!~ActiveDisplayCanBeReadWithoutWrites') }
+        $filters = @()
+        if ($Headless) { $filters += 'FullyQualifiedName!~ActiveDisplayCanBeReadWithoutWrites' }
+        if ($WithoutWebpCodec) {
+            Write-Warning 'WEBP codec integration case explicitly excluded on this runner. Run the full suite on Windows 11 with its system codec before release.'
+            $filters += 'DisplayName!~.webp'
+        }
+        if ($filters.Count) { $testArguments += @('--filter', ($filters -join '&')) }
         & $Dotnet @testArguments
         if ($LASTEXITCODE -ne 0) { throw 'Windows integration tests failed.' }
     }

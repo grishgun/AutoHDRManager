@@ -97,6 +97,8 @@ On Windows x64, install the .NET SDK specified in `global.json`, then run:
 
 Output: `dist/AutoHDRManager.exe`. The script runs Core and Windows tests and verifies a single-file publish. `-Headless` skips only the physical-display read test for CI; it does not switch HDR. **86 tests passed** locally for this release (63 Core + 23 Windows, no skips). GitHub Actions builds and uploads artifacts; it does not publish releases automatically. [Build details](docs/BUILD-ENVIRONMENT.md) · [Architecture](docs/ARCHITECTURE.md) · [Contributing](CONTRIBUTING.md).
 
+Windows Server GitHub Actions also uses `-WithoutWebpCodec` because its system WEBP decoder fails to initialize (0x88982F8B). CI runs 84 cases with two explicit exclusions: physical-display reading and one WEBP integration case. All 86 passed locally before release. Application WEBP support depends on an installed working Windows system decoder; PNG/JPG remain available.
+
 ## License
 
 Original project code, documentation, logo and original demo artwork: **[MIT](LICENSE)**, copyright (c) 2026 grishgun. Bundled dependencies retain their own licenses; see [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md) and [BINARY-TERMS.md](BINARY-TERMS.md). This project is not affiliated with Microsoft, Valve or any game publisher.

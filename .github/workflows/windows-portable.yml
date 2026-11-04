@@ -34,7 +34,7 @@ jobs:
           & $Dotnet build AutoHDRManager.sln -c Release -p:Platform=x64 --no-restore
           if ($LASTEXITCODE -ne 0) { throw 'Build failed' }
       - name: Test and publish single-file executable
-        run: ./scripts/build-release.ps1 -Headless
+        run: ./scripts/build-release.ps1 -Headless -WithoutWebpCodec
       - name: Verify output and SHA-256
         run: |
           $files = @(Get-ChildItem dist -Recurse -File)
