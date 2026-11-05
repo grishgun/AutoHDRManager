@@ -193,7 +193,7 @@ public sealed class MainViewModel : Observable
     }
     public string DiagnosticReport() => JsonSerializer.Serialize(new
     {
-        Version = "1.2.3", OS = Environment.OSVersion.Version.ToString(), Runtime.SafeMode, Language = Localization.Language, Theme = Runtime.Settings.Theme,
+        Version = "1.2.4", OS = Environment.OSVersion.Version.ToString(), Runtime.SafeMode, Language = Localization.Language, Theme = Runtime.Settings.Theme,
         HDR = HdrStatus, State = EngineStatus, Monitoring = Runtime.Settings.Monitoring,
         Displays = Displays.Select(d => new { d.Name, d.Supported, d.Enabled, d.Active, d.ModernApi, d.Flags }),
         Games = Games.Count, StructureSizes = WindowsHdrController.StructureSizes

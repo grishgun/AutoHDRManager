@@ -42,7 +42,7 @@ public sealed class AppRuntime
         if (safeMode) Hdr = new ReadOnlyHdr(Hdr);
         Engine = new(Hdr, new SessionRepository(Root), notifications, Log, Settings);
         Launcher = new(Engine, Monitor, () => Games, GameLauncher.Launch, Log);
-        Log.Write("ApplicationStarted", new { SafeMode, Version = "1.2.3", OS = Environment.OSVersion.Version.ToString() });
+        Log.Write("ApplicationStarted", new { SafeMode, Version = "1.2.4", OS = Environment.OSVersion.Version.ToString() });
     }
     public void ApplyLanguage() => Localization.SetLanguage(Settings.Language, global::Windows.System.UserProfile.GlobalizationPreferences.Languages.FirstOrDefault() ?? System.Globalization.CultureInfo.CurrentUICulture.Name);
     public List<Game> Games { get { lock (libraryLock) return library.Select(g => g with { }).ToList(); } }

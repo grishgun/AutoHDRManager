@@ -47,12 +47,22 @@ public sealed record Settings
 }
 public readonly record struct ProcessIdentity(int Pid, long CreationTime);
 public sealed record GameProcess(ProcessIdentity Identity, string? Path, string Name);
-public sealed record Display(string Id, string Name, bool Supported, bool Enabled, bool Active, bool ModernApi, uint Flags);
+public sealed record Display(string Id, string Name, bool Supported, bool Enabled, bool Active, bool ModernApi, uint Flags)
+{
+    public string? Fingerprint { get; init; }
+    public string? HardwareId { get; init; }
+}
 public sealed record Session
 {
     public Guid Id { get; init; } = Guid.NewGuid();
     public DateTimeOffset Started { get; init; }
-    public string DisplayId { get; init; } = "";
+    public string DisplayId { get; set; } = "";
+    public string? DisplayFingerprint { get; init; }
+    public string? DisplayHardwareId { get; init; }
+    public DateTimeOffset? DisplayUnavailableSince { get; set; }
+    public DateTimeOffset? RestoreDeadline { get; set; }
+    public int RestoreProbeCount { get; set; }
+    public string? OwnershipLostReason { get; set; }
     public bool Original { get; init; }
     public bool LastConfirmed { get; set; }
     public bool ChangedByUs { get; set; }

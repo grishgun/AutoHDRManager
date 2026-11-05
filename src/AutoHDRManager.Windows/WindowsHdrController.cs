@@ -72,7 +72,8 @@ public sealed class WindowsHdrController : IHdrController
                         (legacy.Flags & 2) != 0, (legacy.Flags & 2) != 0, false, legacy.Flags);
                 }
                 else { Check(error, "GetAdvancedColorInfo2"); throw new InvalidOperationException(); }
-                result.Add(new(display, target));
+                var identity = MonitorIdentity.Read(name.DevicePath);
+                result.Add(new(display with { Fingerprint = identity.Fingerprint, HardwareId = identity.HardwareId }, target));
             }
             return result;
         }

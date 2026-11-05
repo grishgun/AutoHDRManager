@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.2.4 — 2026-11-06
+
+**Stability Hotfix — critical fix: HDR not restored after monitor disconnect/reconnect.**
+
+- Temporary monitor disconnections no longer automatically trigger `ManualOverride`; the original HDR state and session ownership are retained while the display is unavailable.
+- Re-identify the returning display using its Windows device path and EDID fingerprint. A changed path additionally requires a unique, non-placeholder hardware identifier; ambiguous matches never become fallback write targets.
+- Defer restoration when the last game exits with the monitor disconnected, bounded to 10 minutes / 120 topology probes. Preserve manual HDR changes and the existing three-write retry limit.
+- Add reconnect, delayed restoration, identity, persistence and manual-override regression tests and diagnostic events. Three key regressions reproduce on the old engine and pass with the fix.
+- Validation: all 122 local automated tests passed (92 Core + 30 Windows, no skips). The user confirmed all eight steps of the primary scenario on a Gigabyte MO34WQC2 / Windows 11 using `1.2.4-local.1`: HDR OFF → launch game → HDR ON → physically turn monitor off → turn it on → exit game → HDR OFF. Other hardware-reconnection scenarios have not all been physically tested.
+- No additional interface or cover behavior changes. Recommended update for v1.2.3 users. [RCA and safeguards](docs/HDR-RECONNECT-RCA-1.2.4.md).
+
 ## 1.2.3 — 2026-11-04
 - Retained manual cover selection as the requested fallback: keyless Steam automation is not implemented because permission for the proposed undocumented source was not confirmed.
 - Moved cover selection exclusively into the game menu, removed the large placeholder button and clarified the manual workflow in RU/EN settings.

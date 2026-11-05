@@ -6,7 +6,11 @@ English · [Русский](README.ru.md)
 
 Automatically enable Windows 11 HDR before launching your games and restore the previous display state when they exit.
 
-**[Download v1.2.3](https://github.com/grishgun/AutoHDRManager/releases/tag/v1.2.3)** · [Release notes](docs/PUBLIC-RELEASE-1.2.3.md) · [Report an issue](https://github.com/grishgun/AutoHDRManager/issues)
+**[Download v1.2.4](https://github.com/grishgun/AutoHDRManager/releases/tag/v1.2.4)** · [Release notes](CHANGELOG.md) · [Report an issue](https://github.com/grishgun/AutoHDRManager/issues)
+
+**v1.2.4 Stability Hotfix:** fixes HDR remaining enabled after game exit when the monitor was turned off and back on during gameplay. Temporary display loss now preserves the original HDR state; restoration resumes after verified reconnection or waits for a bounded period if the game has already exited. Manual HDR changes retain priority. **Recommended update for v1.2.3 users.** [Root cause and safeguards](docs/HDR-RECONNECT-RCA-1.2.4.md).
+
+The user confirmed the primary HDR OFF → game launch → HDR ON → physical monitor off/on → game exit → HDR OFF scenario on a Gigabyte MO34WQC2 with Windows 11 using the validation build. This does not establish physical validation of every hardware-reconnection scenario.
 
 ## What it does
 
@@ -19,7 +23,7 @@ Auto HDR Manager controls **system Windows HDR**. It does not convert SDR games 
 - Local PNG/JPG/WEBP covers; optional SteamGridDB integration with your own API key.
 - Read-only HDR and taskbar grouping diagnostics.
 
-**Automatic keyless cover downloads are not implemented in 1.2.3.** Games without a chosen cover use an icon placeholder. HDR shortcuts may remain separate from running game windows on the taskbar.
+**Automatic keyless cover downloads are not implemented in 1.2.4.** Games without a chosen cover use an icon placeholder. HDR shortcuts may remain separate from running game windows on the taskbar.
 
 ## Screenshots
 
@@ -39,7 +43,7 @@ Actual **1.2.3** Release GUI, isolated safe profile, fictional games and origina
 ## Download and run
 
 1. Read and accept the [portable binary and third-party terms](BINARY-TERMS.md).
-2. From [Release v1.2.3](https://github.com/grishgun/AutoHDRManager/releases/tag/v1.2.3), download **AutoHDRManager.exe** and **SHA256SUMS.txt** into the same folder.
+2. From [Release v1.2.4](https://github.com/grishgun/AutoHDRManager/releases/tag/v1.2.4), download **AutoHDRManager.exe** and **SHA256SUMS.txt** into the same folder.
 3. Verify the checksum in PowerShell:
 
    ```powershell
@@ -68,7 +72,7 @@ To set a cover, use `···` → **Change cover**. PNG, JPG and WEBP are decoded
 
 The app reports shortcut creation, not confirmed pinning. Clicking the pinned shortcut forwards `--launch-game <GameId>` through IPC to the existing manager, or starts one in the background. There is no second monitoring engine. After moving the portable EXE, run the new copy once to refresh the stable launcher; existing links retain their targets. Original Steam shortcuts and Windows' pinned-item database are not edited.
 
-Windows Shell controls grouping. The HDR shortcut and the game's own window **can appear as two taskbar buttons**; 1.2.3 does not guarantee merging them. [Taskbar behavior and diagnostics](docs/TASKBAR.md).
+Windows Shell controls grouping. The HDR shortcut and the game's own window **can appear as two taskbar buttons**; 1.2.4 does not guarantee merging them. [Taskbar behavior and diagnostics](docs/TASKBAR.md).
 
 ## Language and settings
 
@@ -80,7 +84,7 @@ Settings include startup, start minimized, close to tray, notifications, monitor
 
 - **HDR unavailable:** use Diagnostics to read the active displays; check Windows HDR support, connection and driver. No guaranteed compatibility across all displays/GPUs is claimed.
 - **Game not tracked:** configure its actual executable, including a child shipping process if necessary. Launcher and tracked EXE may differ.
-- **HDR changed manually:** the manager yields ownership and avoids blindly undoing the manual change. A disconnected display also ends ownership; restoration failures retain recovery information.
+- **HDR changed manually:** the manager yields ownership and avoids blindly undoing an observed manual change. Temporary display loss preserves the session. After game exit, a disconnected display can return within 10 minutes / 120 topology probes for verified restoration; ambiguous identity or an observed HDR mismatch prevents automatic writes. [Reconnect limits](docs/HDR-RECONNECT-RCA-1.2.4.md).
 - **No cover:** choose a local image. There is no automatic keyless online lookup in this version.
 - **Two taskbar buttons:** a known Windows Shell/launcher limitation; use read-only grouping diagnostics, not injected window changes.
 - **Report a bug:** use [Issues](https://github.com/grishgun/AutoHDRManager/issues). Logs and taskbar reports can contain private paths; redact them first. See [SECURITY.md](SECURITY.md) for private security reports.
@@ -95,9 +99,9 @@ On Windows x64, install the .NET SDK specified in `global.json`, then run:
 ./scripts/build-release.ps1
 ```
 
-Output: `dist/AutoHDRManager.exe`. The script runs Core and Windows tests and verifies a single-file publish. `-Headless` skips only the physical-display read test for CI; it does not switch HDR. **86 tests passed** locally for this release (63 Core + 23 Windows, no skips). GitHub Actions builds and uploads artifacts; it does not publish releases automatically. [Build details](docs/BUILD-ENVIRONMENT.md) · [Architecture](docs/ARCHITECTURE.md) · [Contributing](CONTRIBUTING.md).
+Output: `dist/AutoHDRManager.exe`. The script runs Core and Windows tests and verifies a single-file publish. `-Headless` skips only the physical-display read test for CI; it does not switch HDR. **122 tests passed** locally for this release (92 Core + 30 Windows, no skips). GitHub Actions builds and uploads artifacts; it does not publish releases automatically. [Build details](docs/BUILD-ENVIRONMENT.md) · [Architecture](docs/ARCHITECTURE.md) · [Contributing](CONTRIBUTING.md).
 
-Windows Server GitHub Actions also uses `-WithoutWebpCodec` because its system WEBP decoder fails to initialize (0x88982F8B). CI runs 84 cases with two explicit exclusions: physical-display reading and one WEBP integration case. All 86 passed locally before release. Application WEBP support depends on an installed working Windows system decoder; PNG/JPG remain available.
+Windows Server GitHub Actions retains its existing `-WithoutWebpCodec` filter because its system WEBP decoder fails to initialize (0x88982F8B). CI runs 120 cases with two existing environment-specific exclusions: physical-display reading and one WEBP integration case. No new test exclusions were added for this hotfix; all 122 passed locally before release. Application WEBP support depends on an installed working Windows system decoder; PNG/JPG remain available.
 
 ## License
 

@@ -119,7 +119,7 @@ public class EngineTests
     {
         var r = new Rig(); await r.Tick(0, r.P()); await r.Tick(3, r.P()); await r.Tick(4, r.P() with { Path = null }); Assert.Single(r.Engine.ActiveProcesses);
     }
-    [Fact] public async Task MissingDisplayForfeitsOwnership()
+    [Fact] public async Task MissingDisplayWithoutIdentityCannotResumeOwnership()
     {
         var r = new Rig(); await r.Tick(0, r.P()); await r.Tick(3, r.P()); r.Hdr.Missing = true; await r.Tick(4, r.P()); r.Hdr.Missing = false; await r.Tick(5); Assert.Single(r.Hdr.Writes); Assert.True(r.Hdr.Enabled);
     }

@@ -1,14 +1,14 @@
 param([string]$Destination)
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
-if (!$Destination) { $Destination = Join-Path $projectRoot ('artifacts\github-source-1.2.3-' + (Get-Date -Format 'yyyyMMdd-HHmmss')) }
+if (!$Destination) { $Destination = Join-Path $projectRoot ('artifacts\github-source-1.2.4-' + (Get-Date -Format 'yyyyMMdd-HHmmss')) }
 $exportRoot = [IO.Path]::GetFullPath($Destination)
 $artifactRoot = [IO.Path]::GetFullPath((Join-Path $projectRoot 'artifacts')) + [IO.Path]::DirectorySeparatorChar
 if (!$exportRoot.StartsWith($artifactRoot, [StringComparison]::OrdinalIgnoreCase)) { throw 'Export destination must be inside workspace artifacts.' }
 if (Test-Path -LiteralPath $exportRoot) { throw 'Use a new destination; existing exports are never overwritten.' }
 New-Item -ItemType Directory -Path $exportRoot | Out-Null
 $rootNames = @('README.md','README.ru.md','CHANGELOG.md','CONTRIBUTING.md','SECURITY.md','THIRD-PARTY-NOTICES.md','BINARY-TERMS.md','LICENSE','.gitignore','AutoHDRManager.sln','Directory.Build.props','global.json')
-$docNames = @('ARCHITECTURE.md','BRANDING.md','BUILD-ENVIRONMENT.md','DEPENDENCIES.md','HDR-COMPATIBILITY.md','TASKBAR.md','TASKBAR-GROUPING.md','TESTING.md','PUBLIC-RELEASE-1.2.3.md')
+$docNames = @('ARCHITECTURE.md','BRANDING.md','BUILD-ENVIRONMENT.md','DEPENDENCIES.md','HDR-COMPATIBILITY.md','TASKBAR.md','TASKBAR-GROUPING.md','TESTING.md','PUBLIC-RELEASE-1.2.3.md','HDR-RECONNECT-RCA-1.2.4.md')
 $files = @($rootNames | ForEach-Object { Get-Item -LiteralPath (Join-Path $projectRoot $_) })
 $files += @($docNames | ForEach-Object { Get-Item -LiteralPath (Join-Path $projectRoot ('docs\' + $_)) })
 foreach ($name in @('src','tests','scripts','.github','docs\licenses','docs\screenshots\1.2.3')) {
