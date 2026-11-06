@@ -36,7 +36,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Build failed' }
       - name: Test and publish single-file executable
         run: ./scripts/build-release.ps1 -Headless
-      - name: Validate portable without installed SDK or runtime
+      - name: Validate portable without installed SDK
         run: ./scripts/test-portable-without-sdk.ps1
       - name: Verify output and SHA-256
         run: |
