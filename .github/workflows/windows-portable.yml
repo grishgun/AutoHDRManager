@@ -41,13 +41,13 @@ jobs:
           $files = @(Get-ChildItem dist -Recurse -File)
           if ($files.Count -ne 1 -or $files[0].Name -ne 'AutoHDRManager.exe') { throw 'Unexpected output' }
           $hash = (Get-FileHash dist/AutoHDRManager.exe -Algorithm SHA256).Hash
-          "$hash  AutoHDRManager.exe" | Set-Content artifacts/SHA256SUMS.txt
+          "$hash  AutoHDRManager.exe" | Set-Content dist/SHA256SUMS.txt
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: AutoHDRManager-win-x64
           path: |
             dist/AutoHDRManager.exe
-            artifacts/SHA256SUMS.txt
+            dist/SHA256SUMS.txt
           if-no-files-found: error
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         if: always()
