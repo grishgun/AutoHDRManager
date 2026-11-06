@@ -23,6 +23,7 @@ public sealed partial class MainWindow : Window
     private bool busy;
     private bool uiReady;
     private int queuedLaunches;
+    private string? pendingVideo;
     private readonly nint hwnd;
     public MainWindow(SingleInstance instance, string[] args)
     {
@@ -47,7 +48,7 @@ public sealed partial class MainWindow : Window
         try { SystemBackdrop = new MicaBackdrop(); } catch { Root.Background = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["ApplicationPageBackgroundThemeBrush"]; }
         ApplyTheme();
         SyncPresentation(); uiReady = true;
-        Localization.Changed += () => { SyncPresentation(); UpdateMonitorDetails(); tray.Update(ViewModel.HdrStatus, runtime.Settings.Monitoring); };
+        Localization.Changed += () => { SyncPresentation(); UpdateMonitorDetails(); UpdateVideoStatus(); tray.Update(ViewModel.HdrStatus, runtime.Settings.Monitoring); };
         Activated += (_, _) => runtime.ApplyLanguage();
         Navigation.DisplayModeChanged += (_, _) => NavFooter.Visibility = Navigation.IsPaneOpen ? Visibility.Visible : Visibility.Collapsed;
         Navigation.PaneOpened += (_, _) => NavFooter.Visibility = Visibility.Visible;
@@ -59,9 +60,11 @@ public sealed partial class MainWindow : Window
         runtime.Start();
         var request = LaunchRequest.Parse(arguments);
         if (!request.Background && !runtime.Settings.StartMinimized) ShowWindow();
-        try { if (!runtime.SafeMode) runtime.Shortcuts.RefreshExisting(runtime.Games); }
+        try { if (!runtime.SafeMode) { runtime.Shortcuts.RefreshExisting(runtime.Games); runtime.VideoAssociations.RefreshExisting(); } }
         catch (Exception ex) { ViewModel.Error = ex.Message; runtime.Log.Write("ShortcutRefreshFailed", new { ex.Message }); tray.Show(L.Get("Ярлыки требуют внимания"), ex.Message); }
         if (request.GameId is Guid id) EnqueueLaunch(id);
+        if (request.VideoPath is string file) EnqueueVideo(file);
+        UpdateVideoStatus();
         _ = Guard(ViewModel.LoadCoversAsync);
     }
     public bool EnqueueLaunch(Guid id)
@@ -83,6 +86,55 @@ public sealed partial class MainWindow : Window
         if (!accepted) Interlocked.Decrement(ref queuedLaunches);
         return accepted;
     }
+    public bool EnqueueVideo(string file)
+    {
+        if (exiting || runtime.SafeMode) return false;
+        if (Interlocked.Increment(ref queuedLaunches) > 16) { Interlocked.Decrement(ref queuedLaunches); return false; }
+        bool accepted = DispatcherQueue.TryEnqueue(async () =>
+        {
+            try { if (!exiting) await runtime.OpenVideoAsync(file); }
+            catch (OperationCanceledException) when (exiting) { }
+            catch (Exception ex)
+            {
+                if (ex.Message == "VideoVlcMissing") pendingVideo = file;
+                string message = L.Get(ex.Message.StartsWith("Video", StringComparison.Ordinal) ? ex.Message : "VideoVlcStartFailed");
+                ViewModel.Error = message; runtime.Log.Write("VideoOpenFailed", new { Error = ex.GetType().Name });
+                tray.Show(L.Get("VideoTitle"), message);
+                ShowWindow(); Navigation.SelectedItem = Navigation.MenuItems[1];
+            }
+            finally { Interlocked.Decrement(ref queuedLaunches); }
+        });
+        if (!accepted) Interlocked.Decrement(ref queuedLaunches);
+        return accepted;
+    }
+    private void UpdateVideoStatus()
+    {
+        string? vlc = runtime.VideoPlayer.Find(runtime.Settings.VlcPath);
+        VideoVlcStatus.Text = L.Get(vlc == null ? "VideoVlcMissing" : runtime.Settings.VlcPath == null ? "VideoVlcAuto" : "VideoVlcSelected");
+        VideoStatus.Text = L.Get(!runtime.Settings.SmartVideoHdr ? "VideoDisabled" : vlc == null || !runtime.VideoAssociations.IsRegistered ? "VideoSetupNeeded" : "VideoReady");
+    }
+    private async void VideoEnabledChanged(object sender, RoutedEventArgs e) => await Guard(() =>
+    {
+        if (!uiReady) return Task.CompletedTask;
+        runtime.Settings.SmartVideoHdr = ViewModel.EditSettings.SmartVideoHdr = VideoEnabled.IsOn;
+        var saved = runtime.SettingsRepository.Load(); saved.SmartVideoHdr = VideoEnabled.IsOn; runtime.SettingsRepository.Save(saved);
+        UpdateVideoStatus(); return Task.CompletedTask;
+    });
+    private async void VideoBrowseClick(object sender, RoutedEventArgs e) => await Guard(async () =>
+    {
+        string? path = await PickAsync(".exe"); if (path == null) return;
+        if (!VideoPlayer.Valid(path)) throw new InvalidOperationException(L.Get("VideoVlcMissing"));
+        runtime.Settings.VlcPath = ViewModel.EditSettings.VlcPath = path;
+        var saved = runtime.SettingsRepository.Load(); saved.VlcPath = path; runtime.SettingsRepository.Save(saved); UpdateVideoStatus();
+        if (pendingVideo is string video) { pendingVideo = null; EnqueueVideo(video); }
+    });
+    private async void VideoRegisterClick(object sender, RoutedEventArgs e) => await Guard(() =>
+    {
+        if (runtime.SafeMode) throw new InvalidOperationException(L.Get("VideoSafeMode"));
+        if (runtime.VideoPlayer.Find(runtime.Settings.VlcPath) == null) throw new InvalidOperationException(L.Get("VideoVlcMissing"));
+        runtime.VideoAssociations.Register(); VideoAssociations.OpenDefaults(true); UpdateVideoStatus(); return Task.CompletedTask;
+    });
+    private async void VideoDefaultsClick(object sender, RoutedEventArgs e) => await Guard(() => { VideoAssociations.OpenDefaults(false); return Task.CompletedTask; });
     public void ShowWindow() { AppWindow.Show(); Activate(); TrayService.RestoreWindow(hwnd); runtime.Log.Write("WindowOpened"); }
     private void ApplyTheme()
     {

@@ -209,8 +209,7 @@
   <data name="Attention" xml:space="preserve">
     <value>Needs attention</value>
   </data>
-  <data name="AboutVersion" xml:space="preserve">
-    <value>Version 1.2.3 · Windows 11 x64</value>
+  <data name="AboutVersion" xml:space="preserve"><value>1.3.0-local.1</value>
   </data>
   <data name="AboutTitle" xml:space="preserve">
     <value>HDR when your game needs it</value>
@@ -689,4 +688,21 @@ Monitoring: {1}</value>
   <data name="ThemeHelp" xml:space="preserve"><value>Follow Windows, or choose a light or dark appearance.</value></data>
   <data name="LanguageHelp" xml:space="preserve"><value>Applies immediately and is remembered.</value></data>
   <data name="ViewHelp" xml:space="preserve"><value>Portrait covers or a compact game list.</value></data>
+  <data name="VideoChooseVlc" xml:space="preserve"><value>Choose vlc.exe…</value></data>
+  <data name="VideoConfigure" xml:space="preserve"><value>Set up MKV/MP4 opening</value></data>
+  <data name="VideoDefaultsHelp" xml:space="preserve"><value>Select Auto HDR Manager Video for .mkv and .mp4 in Windows Settings. Turning this feature off keeps opening files in VLC without changing HDR; choose VLC in Windows to restore direct opening.</value></data>
+  <data name="VideoDisabled" xml:space="preserve"><value>Off — videos open in VLC without HDR switching.</value></data>
+  <data name="VideoHdrFallback" xml:space="preserve"><value>HDR could not be confirmed. Opening the video in VLC with the current display state.</value></data>
+  <data name="VideoHdrUnavailable" xml:space="preserve"><value>Automatic HDR is unavailable for this video.</value></data>
+  <data name="VideoHelp" xml:space="preserve"><value>HDR10/HLG: enable HDR before VLC, restore it after VLC closes. Close VLC before the next movie.</value></data>
+  <data name="VideoInvalidPath" xml:space="preserve"><value>Select one MKV or MP4 file using its full local or network path.</value></data>
+  <data name="VideoReady" xml:space="preserve"><value>Ready — select this handler in Windows for double-click opening.</value></data>
+  <data name="VideoRestoreVlc" xml:space="preserve"><value>Choose VLC as the default app</value></data>
+  <data name="VideoSafeMode" xml:space="preserve"><value>File associations cannot be changed in safe mode.</value></data>
+  <data name="VideoSetupNeeded" xml:space="preserve"><value>Setup required</value></data>
+  <data name="VideoTitle" xml:space="preserve"><value>Smart Video HDR</value></data>
+  <data name="VideoVlcAuto" xml:space="preserve"><value>VLC: found automatically</value></data>
+  <data name="VideoVlcMissing" xml:space="preserve"><value>VLC was not found. Choose the installed vlc.exe in Video HDR settings.</value></data>
+  <data name="VideoVlcSelected" xml:space="preserve"><value>VLC: selected</value></data>
+  <data name="VideoVlcStartFailed" xml:space="preserve"><value>VLC could not be started. Check the selected vlc.exe path.</value></data>
 </root>

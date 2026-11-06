@@ -176,6 +176,7 @@ public sealed class MainViewModel : Observable
         s.Monitoring = Runtime.SafeMode ? false : e.Monitoring; s.Theme = e.Theme; s.EnableDelaySeconds = e.EnableDelaySeconds; s.RestoreDelaySeconds = e.RestoreDelaySeconds;
         s.PollSeconds = e.PollSeconds; s.LaunchTimeoutSeconds = e.LaunchTimeoutSeconds; s.DisplayId = e.DisplayId;
         s.OnlineCovers = e.OnlineCovers; s.Language = e.Language; s.LibraryView = e.LibraryView;
+        s.SmartVideoHdr = e.SmartVideoHdr; s.VlcPath = e.VlcPath;
         Runtime.ApplyLanguage(); Filter();
         Raise(nameof(MonitoringStatus)); Raise(nameof(PauseLabel)); ThemeChanged?.Invoke();
     }
@@ -193,7 +194,7 @@ public sealed class MainViewModel : Observable
     }
     public string DiagnosticReport() => JsonSerializer.Serialize(new
     {
-        Version = "1.2.4", OS = Environment.OSVersion.Version.ToString(), Runtime.SafeMode, Language = Localization.Language, Theme = Runtime.Settings.Theme,
+        Version = "1.3.0-local.1", OS = Environment.OSVersion.Version.ToString(), Runtime.SafeMode, Language = Localization.Language, Theme = Runtime.Settings.Theme,
         HDR = HdrStatus, State = EngineStatus, Monitoring = Runtime.Settings.Monitoring,
         Displays = Displays.Select(d => new { d.Name, d.Supported, d.Enabled, d.Active, d.ModernApi, d.Flags }),
         Games = Games.Count, StructureSizes = WindowsHdrController.StructureSizes

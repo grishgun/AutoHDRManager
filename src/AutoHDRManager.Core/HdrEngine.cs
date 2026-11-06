@@ -7,6 +7,8 @@ public sealed class HdrEngine(IHdrController hdr, ISessionRepository journal, IN
     private Session? session;
     private DateTimeOffset due;
     private readonly Dictionary<Guid, DateTimeOffset> launches = [];
+    // Only processes launched by VideoLaunchService hold these demands. The existing runtime loop releases them.
+    private readonly Dictionary<Guid, ProcessIdentity?> videoDemands = [];
     private int attempts;
     private bool restoring;
     private bool recoveryChecked;
@@ -55,7 +57,8 @@ public sealed class HdrEngine(IHdrController hdr, ISessionRepository journal, IN
             }
             if (session != null)
             {
-                if (!session.Processes.ToHashSet().SetEquals(active)) { session.Processes = active.ToList(); journal.Save(session); }
+                var owners = active.Concat(videoDemands.Values.OfType<ProcessIdentity>()).ToHashSet();
+                if (!session.Processes.ToHashSet().SetEquals(owners)) { session.Processes = owners.ToList(); journal.Save(session); }
             }
             else
             {
@@ -67,7 +70,7 @@ public sealed class HdrEngine(IHdrController hdr, ISessionRepository journal, IN
                 if (snapshot.Any(p => p.Path != null && games.Any(g => g.Id == launch.Key && GamePaths.Equal(g.ExecutablePath, p.Path)))) launches.Remove(launch.Key);
                 else if (launch.Value <= now) { launches.Remove(launch.Key); log.Write("LaunchTimeout", new { GameId = launch.Key }); }
             }
-            bool needed = active.Count > 0 || launches.Count > 0;
+            bool needed = active.Count > 0 || launches.Count > 0 || videoDemands.Count > 0;
             if (session != null)
             {
                 if (needed && settings.Monitoring && session.RestoreDeadline != null)
@@ -363,7 +366,52 @@ public sealed class HdrEngine(IHdrController hdr, ISessionRepository journal, IN
     public async Task CancelLaunchAsync(CancellationToken token = default, Guid? gameId = null)
     {
         await gate.WaitAsync(token);
-        try { if (gameId is Guid id) launches.Remove(id); else launches.Clear(); if (active.Count == 0 && launches.Count == 0) await EndAsync(DateTimeOffset.UtcNow, token); }
+        try { if (gameId is Guid id) launches.Remove(id); else launches.Clear(); if (active.Count == 0 && launches.Count == 0 && videoDemands.Count == 0) await EndAsync(DateTimeOffset.UtcNow, token); }
+        finally { gate.Release(); }
+    }
+    public async Task PrepareVideoAsync(Guid id, CancellationToken token = default)
+    {
+        await gate.WaitAsync(token);
+        try
+        {
+            if (!settings.Monitoring || !recoveryChecked) throw new InvalidOperationException("VideoHdrUnavailable");
+            videoDemands.Add(id, null);
+            if (session == null)
+            {
+                var displays = await hdr.GetDisplaysAsync(token);
+                CurrentDisplay = settings.DisplayId is { Length: > 0 } displayId ? displays.FirstOrDefault(d => d.Id == displayId) : displays.FirstOrDefault(d => d.Supported);
+                await BeginAsync(DateTimeOffset.UtcNow, token);
+            }
+            await ChangeAsync(true, DateTimeOffset.UtcNow, token);
+            if (session!.ManualOverride || CurrentDisplay is not { Enabled: true, Active: true }) throw new InvalidOperationException("VideoHdrUnavailable");
+            restoring = false; State = HdrState.HDRActive;
+            log.Write("VideoHdrConfirmed", new { RequestId = id, session.Id });
+        }
+        finally { gate.Release(); }
+    }
+    public async Task DispatchVideoAsync(Guid id, Func<ProcessIdentity> start, CancellationToken token = default)
+    {
+        await gate.WaitAsync(token);
+        try
+        {
+            if (!settings.Monitoring || !videoDemands.ContainsKey(id) || session == null ||
+                !await ObserveAsync(DateTimeOffset.UtcNow, token) || session.ManualOverride || CurrentDisplay is not { Enabled: true, Active: true })
+                throw new InvalidOperationException("VideoHdrUnavailable");
+            token.ThrowIfCancellationRequested();
+            videoDemands[id] = start();
+            session.Processes = active.Concat(videoDemands.Values.OfType<ProcessIdentity>()).ToList(); journal.Save(session);
+        }
+        finally { gate.Release(); }
+    }
+    public async Task ReleaseVideoAsync(Guid id)
+    {
+        await gate.WaitAsync();
+        try
+        {
+            if (!videoDemands.Remove(id)) return;
+            log.Write("VideoHdrReleased", new { RequestId = id });
+            if (active.Count == 0 && launches.Count == 0 && videoDemands.Count == 0) await EndAsync(DateTimeOffset.UtcNow, CancellationToken.None);
+        }
         finally { gate.Release(); }
     }
     public async Task ShutdownAsync(CancellationToken token = default)

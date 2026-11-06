@@ -14,6 +14,9 @@ public sealed class AppRuntime
     public ProcessMonitor Monitor { get; } = new();
     public HdrEngine Engine { get; }
     public GameLaunchService Launcher { get; }
+    public VideoLaunchService Video { get; }
+    public VideoPlayer VideoPlayer { get; } = new();
+    public VideoAssociations VideoAssociations { get; }
     public GameShortcuts Shortcuts { get; } = new();
     public StartupManager Startup { get; } = new();
     public ICoverProvider Covers { get; }
@@ -42,12 +45,15 @@ public sealed class AppRuntime
         if (safeMode) Hdr = new ReadOnlyHdr(Hdr);
         Engine = new(Hdr, new SessionRepository(Root), notifications, Log, Settings);
         Launcher = new(Engine, Monitor, () => Games, GameLauncher.Launch, Log);
-        Log.Write("ApplicationStarted", new { SafeMode, Version = "1.2.4", OS = Environment.OSVersion.Version.ToString() });
+        Video = new(Engine, Monitor, () => Games, Settings, new MediaInfoVideoProbe(), VideoPlayer, Log, notifications);
+        VideoAssociations = new(Shortcuts);
+        Log.Write("ApplicationStarted", new { SafeMode, Version = "1.3.0-local.1", OS = Environment.OSVersion.Version.ToString() });
     }
     public void ApplyLanguage() => Localization.SetLanguage(Settings.Language, global::Windows.System.UserProfile.GlobalizationPreferences.Languages.FirstOrDefault() ?? System.Globalization.CultureInfo.CurrentUICulture.Name);
     public List<Game> Games { get { lock (libraryLock) return library.Select(g => g with { }).ToList(); } }
     public void SaveGames(List<Game> games) { lock (libraryLock) { GamesRepository.Save(games); library = games.Select(g => g with { }).ToList(); } }
     public Task LaunchAsync(Guid id) => Launcher.LaunchAsync(id, stop.Token);
+    public Task OpenVideoAsync(string path) => Video.OpenAsync(path, stop.Token);
     public void Start() => loop ??= Task.Run(RunAsync);
     private async Task RunAsync()
     {
@@ -58,6 +64,7 @@ public sealed class AppRuntime
             {
                 var snapshot = await Monitor.SnapshotAsync(stop.Token);
                 await Engine.TickAsync(snapshot, Games, DateTimeOffset.UtcNow, stop.Token);
+                await Video.ReapAsync();
                 Updated?.Invoke(new(Engine.CurrentDisplay, Engine.State, Engine.LastError, Engine.ActiveProcesses.ToHashSet(), snapshot));
             }
             catch (OperationCanceledException) when (stop.IsCancellationRequested) { break; }
@@ -69,6 +76,7 @@ public sealed class AppRuntime
     {
         stop.Cancel(); if (loop != null) await loop;
         await Launcher.DrainAsync();
+        await Video.DrainAsync();
         // Do not cancel an in-flight write: let it complete and then restore safely.
         await Engine.ShutdownAsync();
         OnlineCovers.Dispose();

@@ -10,7 +10,7 @@
     <EnableMsixTooling>true</EnableMsixTooling><IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
     <PublishSingleFile>true</PublishSingleFile><PublishTrimmed>false</PublishTrimmed><PublishAot>false</PublishAot>
     <DebugType>embedded</DebugType><AssemblyName>AutoHDRManager</AssemblyName>
-    <Version>1.2.4</Version>
+    <Version>1.3.0-local.1</Version>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Assets/Hdr.ico</ApplicationIcon>
     <DefineConstants>$(DefineConstants);DISABLE_XAML_GENERATED_MAIN</DefineConstants>

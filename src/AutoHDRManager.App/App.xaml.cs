@@ -23,6 +23,7 @@ public partial class App : Application
         window = new MainWindow(instance, this.args);
         instance.Activated += () => window.DispatcherQueue.TryEnqueue(() => { window.ShowWindow(); });
         instance.LaunchRequested = window.EnqueueLaunch;
+        instance.VideoRequested = window.EnqueueVideo;
         instance.StartListening();
         window.Start();
     }

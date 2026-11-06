@@ -11,6 +11,16 @@ internal static class Program
     [STAThread]
     private static void Main(string[] args)
     {
+        // This worker never creates a manager, takes the single-instance lock, opens a window or touches HDR.
+        if (args.Length == 2 && args[0] == "--video-probe")
+        {
+            VideoMetadata result;
+            try { result = MediaInfoMetadata.Read(args[1]); }
+            catch (Exception ex) { result = new(VideoKind.Unknown, "ProbeError:" + ex.GetType().Name); }
+            using var output = new StreamWriter(Console.OpenStandardOutput(), new System.Text.UTF8Encoding(false));
+            output.Write(System.Text.Json.JsonSerializer.Serialize(result));
+            return;
+        }
         try
         {
             var settings = new SettingsRepository(AppDataPath.Resolve(args)).Load();

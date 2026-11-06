@@ -33,6 +33,8 @@ public sealed record Settings
     public double LaunchTimeoutSeconds { get; set; } = 60;
     public string? DisplayId { get; set; }
     public bool OnlineCovers { get; set; }
+    public bool SmartVideoHdr { get; set; }
+    public string? VlcPath { get; set; }
     public void Validate()
     {
         EnableDelaySeconds = Clamp(EnableDelaySeconds, 0, 60, 3);

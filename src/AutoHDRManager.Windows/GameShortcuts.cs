@@ -50,7 +50,7 @@ public sealed class GameShortcuts(string? root = null, string? executable = null
                 WriteLink(Path.Combine(DirectoryPath, name), Launcher, game);
         // Removed games are rejected by GameId at launch, including copies already pinned by Windows.
     }
-    private void EnsureLauncher()
+    public void EnsureLauncher()
     {
         if (root == null)
         {

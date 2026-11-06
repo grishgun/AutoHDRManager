@@ -15,6 +15,7 @@ public sealed class SingleInstance : IAsyncDisposable
     public bool IsPrimary { get; }
     public event Action? Activated;
     public Func<Guid, bool>? LaunchRequested { get; set; }
+    public Func<string, bool>? VideoRequested { get; set; }
     public SingleInstance(string suffix = "")
     {
         var sid = WindowsIdentity.GetCurrent().User!.Value;
@@ -43,6 +44,17 @@ public sealed class SingleInstance : IAsyncDisposable
                     bool accepted = Guid.TryParseExact(Encoding.ASCII.GetString(payload), "D", out var id) && id != Guid.Empty && LaunchRequested?.Invoke(id) == true;
                     await pipe.WriteAsync(new byte[] { accepted ? (byte)1 : (byte)0 }, timeout.Token);
                 }
+                else if (count == 4 && Encoding.ASCII.GetString(bytes) == "VIDO")
+                {
+                    await pipe.ReadExactlyAsync(bytes, timeout.Token);
+                    int length = System.Buffers.Binary.BinaryPrimitives.ReadInt32LittleEndian(bytes);
+                    if (length is <= 0 or > 131040) continue;
+                    byte[] payload = new byte[length]; await pipe.ReadExactlyAsync(payload, timeout.Token);
+                    bool accepted = false;
+                    try { accepted = VideoRequested?.Invoke(VideoPath.Validate(new UTF8Encoding(false, true).GetString(payload))) == true; }
+                    catch (ArgumentException) { }
+                    await pipe.WriteAsync(new byte[] { accepted ? (byte)1 : (byte)0 }, timeout.Token);
+                }
             }
             catch (OperationCanceledException) { }
             catch (IOException) { await Task.Delay(250, stop.Token).ConfigureAwait(ConfigureAwaitOptions.SuppressThrowing); }
@@ -52,12 +64,19 @@ public sealed class SingleInstance : IAsyncDisposable
         => await NotifyAsync(new LaunchRequest(null, background));
     public async Task NotifyAsync(LaunchRequest request)
     {
-        if (request.Background && request.GameId == null) return;
+        if (request.Background && request.GameId == null && request.VideoPath == null) return;
         using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(20));
         await using var client = new NamedPipeClientStream(".", pipeName, PipeDirection.InOut, PipeOptions.Asynchronous | PipeOptions.CurrentUserOnly);
         await client.ConnectAsync(timeout.Token);
-        await client.WriteAsync(Encoding.ASCII.GetBytes(request.GameId is Guid id ? "LAUN" + id.ToString("D") : "OPEN"), timeout.Token);
-        if (request.GameId != null)
+        if (request.VideoPath is string file)
+        {
+            byte[] payload = Encoding.UTF8.GetBytes(VideoPath.Validate(file));
+            byte[] header = new byte[8]; Encoding.ASCII.GetBytes("VIDO").CopyTo(header, 0);
+            System.Buffers.Binary.BinaryPrimitives.WriteInt32LittleEndian(header.AsSpan(4), payload.Length);
+            await client.WriteAsync(header, timeout.Token); await client.WriteAsync(payload, timeout.Token);
+        }
+        else await client.WriteAsync(Encoding.ASCII.GetBytes(request.GameId is Guid id ? "LAUN" + id.ToString("D") : "OPEN"), timeout.Token);
+        if (request.GameId != null || request.VideoPath != null)
         {
             var ack = new byte[1]; await client.ReadExactlyAsync(ack, timeout.Token);
             if (ack[0] != 1) throw new IOException("Auto HDR Manager не принял запрос запуска. Закройте старую версию и откройте обновлённую.");

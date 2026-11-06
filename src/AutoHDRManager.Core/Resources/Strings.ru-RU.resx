@@ -209,8 +209,7 @@
   <data name="Attention" xml:space="preserve">
     <value>Требуется внимание</value>
   </data>
-  <data name="AboutVersion" xml:space="preserve">
-    <value>Версия 1.2.3 · Windows 11 x64</value>
+  <data name="AboutVersion" xml:space="preserve"><value>1.3.0-local.1</value>
   </data>
   <data name="AboutTitle" xml:space="preserve">
     <value>HDR — когда он нужен игре</value>
@@ -689,4 +688,21 @@ HDR: {0}
   <data name="ThemeHelp" xml:space="preserve"><value>Следовать Windows или выбрать светлое либо тёмное оформление.</value></data>
   <data name="LanguageHelp" xml:space="preserve"><value>Применяется сразу и сохраняется.</value></data>
   <data name="ViewHelp" xml:space="preserve"><value>Вертикальные обложки или компактный список игр.</value></data>
+  <data name="VideoChooseVlc" xml:space="preserve"><value>Выбрать vlc.exe…</value></data>
+  <data name="VideoConfigure" xml:space="preserve"><value>Настроить открытие MKV/MP4</value></data>
+  <data name="VideoDefaultsHelp" xml:space="preserve"><value>В параметрах Windows выберите Auto HDR Manager Video для .mkv и .mp4. После отключения функции файлы продолжат открываться в VLC без изменения HDR; для прямого открытия выберите VLC в Windows.</value></data>
+  <data name="VideoDisabled" xml:space="preserve"><value>Выключено — видео открывается в VLC без переключения HDR.</value></data>
+  <data name="VideoHdrFallback" xml:space="preserve"><value>HDR не удалось подтвердить. Видео открывается в VLC с текущим состоянием дисплея.</value></data>
+  <data name="VideoHdrUnavailable" xml:space="preserve"><value>Автоматическое включение HDR для этого видео недоступно.</value></data>
+  <data name="VideoHelp" xml:space="preserve"><value>HDR10/HLG: включать HDR до VLC и восстанавливать после его закрытия. Перед следующим фильмом закройте VLC.</value></data>
+  <data name="VideoInvalidPath" xml:space="preserve"><value>Выберите один MKV или MP4 по полному локальному или сетевому пути.</value></data>
+  <data name="VideoReady" xml:space="preserve"><value>Готово — для двойного клика выберите этот обработчик в Windows.</value></data>
+  <data name="VideoRestoreVlc" xml:space="preserve"><value>Вернуть VLC приложением по умолчанию</value></data>
+  <data name="VideoSafeMode" xml:space="preserve"><value>В безопасном режиме нельзя менять регистрацию файловых ассоциаций.</value></data>
+  <data name="VideoSetupNeeded" xml:space="preserve"><value>Требуется настройка</value></data>
+  <data name="VideoTitle" xml:space="preserve"><value>Smart Video HDR</value></data>
+  <data name="VideoVlcAuto" xml:space="preserve"><value>VLC: найден автоматически</value></data>
+  <data name="VideoVlcMissing" xml:space="preserve"><value>VLC не найден. Выберите установленный vlc.exe в настройках Video HDR.</value></data>
+  <data name="VideoVlcSelected" xml:space="preserve"><value>VLC: выбран пользователем</value></data>
+  <data name="VideoVlcStartFailed" xml:space="preserve"><value>Не удалось запустить VLC. Проверьте путь к vlc.exe.</value></data>
 </root>

@@ -1,5 +1,9 @@
 # Third-party notices
 
+## Smart Video HDR (1.3.0 local development)
+
+This product uses [MediaInfo](https://mediaarea.net/MediaInfo) library, Copyright (c) 2002–2025 MediaArea.net SARL. The unmodified 26.10 Windows x64 DLL is distributed under its BSD-style license. [License and embedded component notices](docs/licenses/MediaInfo) are included in the portable executable; [provenance, size and checksums](src/AutoHDRManager.Windows/Native/README.md) are recorded in source. These components retain their own licenses and are not relicensed under the project's MIT grant. VLC is discovered on the user's computer, not redistributed. FFmpeg is not part of the application.
+
 Auto HDR Manager's original source, documentation, logo and original demonstration artwork are licensed under MIT, copyright (c) 2026 grishgun. The owner confirmed the rights to publish the supplied logo reference and license the resulting branding. See [LICENSE](LICENSE) and [docs/BRANDING.md](docs/BRANDING.md).
 
 The portable executable bundles .NET and Windows App SDK components under their own licenses. MIT does not relicense these dependencies. Read and accept [BINARY-TERMS.md](BINARY-TERMS.md) before downloading or using the binary. Exact package versions are in [docs/DEPENDENCIES.md](docs/DEPENDENCIES.md). Supplied licenses and notices are preserved in [docs/licenses](docs/licenses) and embedded under Assets/Licenses, available through About.
