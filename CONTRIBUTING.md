@@ -9,4 +9,4 @@ Keep the existing HDR ownership, manual-override and launch ordering invariants.
 Use original demo artwork in screenshots. Never submit private game paths, settings, keys, session journals, logs, actual game covers or SDK/build caches. Review the allowlisted source export before publication. Check third-party notices when updating dependencies. Describe the problem, final behavior, tests and remaining limitations in a proposed change.
 
 
-Windows Server GitHub Actions also uses `-WithoutWebpCodec` because its system WEBP decoder fails to initialize (0x88982F8B). CI runs 84 cases with two explicit exclusions: physical-display reading and one WEBP integration case. All 86 passed locally before release. Application WEBP support depends on an installed working Windows system decoder; PNG/JPG remain available.
+Windows 11 CI executes WEBP decoding; do not exclude it to make a build pass. Only physical-display reading is omitted in headless CI. The complete local suite must pass before release. See docs/TESTING.md for SDK isolation and portable smoke checks.

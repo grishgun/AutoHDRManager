@@ -1,12 +1,18 @@
 # Changelog
 
-## 1.3.0-rc.1 — local release candidate, not published
+## 1.3.0 — 2026-11-07
 
-- Opt-in Smart Video HDR for MKV/MP4 opened in VLC: bundled, bounded MediaInfo metadata probing; HDR10/HLG preparation and confirmation before player dispatch; SDR/unknown passthrough.
-- Reuse the existing IPC, stable launcher and HDR session engine. Exact owned VLC process lifetimes coexist with games without changing the 1.2.4 reconnect algorithm or manual override safeguards.
-- Add explicit per-user handler registration and Windows Default Apps navigation; no UserChoice writes or automatic default changes. Compact RU/EN settings block, off by default.
-- Show v1.3.0 from assembly metadata in the navigation header and About page while preserving full diagnostic build identity. Use VLC video file icons through DefaultIcon, with original video artwork as fallback and Shell cache notification.
-- 188 automated tests pass, including all 180 accepted development-build tests. User acceptance of 1.3.0-local.1: 17/17 checks passed; final RC visual acceptance is pending. [Design, validation and manual checklist](docs/SMART-VIDEO-HDR.md).
+**Smart Video HDR** adds opt-in automatic Windows HDR management for HDR10/HLG MKV/MP4 movies opened in VLC.
+
+- Detect metadata with bundled MediaInfo, enable/confirm HDR before playback and restore the original state when the controlled VLC process closes.
+- Support Explorer double-click opening, background cold start and independent VLC monitoring; coordinate video demands with existing game sessions.
+- Preserve the v1.2.4 display-reconnection and manual-override safeguards and existing game launch/IPC/shortcut behavior.
+- Show a minimal v1.3.0 label and preserve standard VLC file icons via the application's DefaultIcon registration. Keep UserChoice under Windows control.
+- Update English/Russian documentation, release screenshots and component notices.
+- Run WEBP integration tests on a Windows 11 CI runner instead of filtering them out on Windows Server. Add portable startup and metadata checks without accessible installed SDKs.
+- Validation: 188/188 local tests, 17/17 user acceptance checks on Windows 11 / MO34WQC2. HLG has automated coverage but no confirmed physical playback test. No claim is made for every hardware/driver/reconnect scenario.
+
+[Release notes](docs/V1.3.0-RELEASE-NOTES.md) · [Smart Video HDR details](docs/SMART-VIDEO-HDR.md).
 
 ## 1.2.4 — 2026-11-06
 

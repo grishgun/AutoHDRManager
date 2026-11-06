@@ -2,7 +2,7 @@
 
 Generated from the restored NuGet package metadata for the 1.2.3 application. Runtime/SDK packages may contain additional third-party notices.
 
-The 1.3.0-local.1 development branch also bundles the official MediaInfoLib 26.10 x64 DLL (8,564,120 bytes, BSD-2-Clause). [Provenance and checksums](../src/AutoHDRManager.Windows/Native/README.md) and [all retained notices](licenses/MediaInfo) accompany the executable. The NuGet versions below are unchanged. Neither VLC nor FFmpeg is redistributed.
+Version 1.3.0 also bundles the official MediaInfoLib 26.10 x64 DLL (8,564,120 bytes, BSD-2-Clause). [Provenance and checksums](../src/AutoHDRManager.Windows/Native/README.md) and [all retained notices](licenses/MediaInfo) accompany the executable. The NuGet versions below are unchanged. Neither VLC nor FFmpeg is redistributed.
 
 | Package | Version | Declared license |
 |---|---|---|

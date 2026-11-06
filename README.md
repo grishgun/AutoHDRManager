@@ -1,108 +1,126 @@
-English · [Русский](README.ru.md)
+**[English](README.md) | [Русский](README.ru.md)**
 
 <img src="src/AutoHDRManager.App/Assets/Logo-128.png" width="96" alt="Auto HDR Manager logo">
 
 # Auto HDR Manager
 
-Automatically enable Windows 11 HDR before launching your games and restore the previous display state when they exit.
+**Auto HDR Manager automatically switches Windows HDR on for selected games and HDR10/HLG movies, then restores your previous display state when you're done.**
 
-**[Download v1.2.4](https://github.com/grishgun/AutoHDRManager/releases/tag/v1.2.4)** · [Release notes](CHANGELOG.md) · [Report an issue](https://github.com/grishgun/AutoHDRManager/issues)
+**[Download Latest Release](https://github.com/grishgun/AutoHDRManager/releases/latest)** · [All releases](https://github.com/grishgun/AutoHDRManager/releases) · [What's new in v1.3.0](docs/V1.3.0-RELEASE-NOTES.md) · [Report an issue](https://github.com/grishgun/AutoHDRManager/issues)
 
-**v1.2.4 Stability Hotfix:** fixes HDR remaining enabled after game exit when the monitor was turned off and back on during gameplay. Temporary display loss now preserves the original HDR state; restoration resumes after verified reconnection or waits for a bounded period if the game has already exited. Manual HDR changes retain priority. **Recommended update for v1.2.3 users.** [Root cause and safeguards](docs/HDR-RECONNECT-RCA-1.2.4.md).
+Portable, free and open source for Windows 11. This app controls **system HDR**; it does not convert SDR content into HDR and is not the Windows **Auto HDR** game-conversion feature.
 
-The user confirmed the primary HDR OFF → game launch → HDR ON → physical monitor off/on → game exit → HDR OFF scenario on a Gigabyte MO34WQC2 with Windows 11 using the validation build. This does not establish physical validation of every hardware-reconnection scenario.
+## Games and everyday use
 
-## What it does
+- Enable HDR before launching a game from the library or a dedicated HDR shortcut; confirm it and wait one second before starting the game.
+- Restore the original display state after the tracked game and controlled HDR videos finish. An initially enabled HDR state stays enabled.
+- Preserve manual HDR changes and the display-reconnection safeguards introduced in v1.2.4.
+- Launch from the taskbar using shortcuts with original game icons; keep the manager in the tray with one instance and optional Windows startup.
+- Use a searchable game library, grid/list views, local PNG/JPG/WEBP covers and optional SteamGridDB with your own API key.
+- Switch between English/Russian and system/light/dark appearance. Read HDR and taskbar diagnostics when troubleshooting.
 
-Auto HDR Manager controls **system Windows HDR**. It does not convert SDR games into HDR or replace Windows Auto HDR. Launch a game from the library or a dedicated HDR shortcut: the manager enables HDR, confirms Enabled + Active, waits one second for stabilization, rechecks the state and starts the existing game launcher. One shared engine tracks the actual game processes and restores the initial state after the last tracked game exits, subject to session ownership and manual override rules.
-
-- Native WinUI 3 interface, Mica, adaptive navigation, portrait cards, search and list view.
-- English, Russian and System language; System, Light and Dark themes.
-- Single instance with IPC, tray operation and optional Windows startup.
-- Per-game HDR shortcuts with the game's original EXE icon and manual Windows taskbar pinning.
-- Local PNG/JPG/WEBP covers; optional SteamGridDB integration with your own API key.
-- Read-only HDR and taskbar grouping diagnostics.
-
-**Automatic keyless cover downloads are not implemented in 1.2.4.** Games without a chosen cover use an icon placeholder. HDR shortcuts may remain separate from running game windows on the taskbar.
+**v1.3.0 adds Smart Video HDR**, a discreet version label and familiar VLC file icons. Game-launch behavior and the validated HDR engine are retained.
 
 ## Screenshots
 
-Actual **1.2.3** Release GUI, isolated safe profile, fictional games and original abstract demo artwork. No commercial game covers or personal library data are included. Monitoring is paused in these screenshots because safe mode forbids HDR writes.
+Actual v1.3.0 windows from an isolated safe profile, with fictional games and original demonstration artwork. Monitoring is paused because this profile forbids HDR writes. No personal library or commercial game covers are published.
 
-![Game library — English, light theme](docs/screenshots/1.2.3/library-en-light.png)
-![Game library — Russian, dark theme](docs/screenshots/1.2.3/library-ru-dark.png)
-![Settings](docs/screenshots/1.2.3/settings-en-light.png)
+![Game library](docs/screenshots/1.3.0/library-en-dark.png)
 
 ## Requirements
 
-- Windows 11 **x64**, HDR-capable display, compatible graphics driver and connection.
-- Target minimum Windows build 22000; development validation used build 26300. Other hardware/build combinations require validation.
-- The self-contained EXE bundles .NET and Windows App SDK. No administrator rights, MSIX package or separate .NET installation is required by this build.
-- A clean Windows VM and broad multi-monitor matrix have **not** been validated. The executable is unsigned; verify its checksum and source before running it.
+- Windows 11 **x64**, an HDR-capable display, compatible GPU/driver and display connection. Minimum target build: 22000; user acceptance: build 26300 / Gigabyte MO34WQC2.
+- **VLC** installed or selected in settings for Smart Video HDR. Games do not require VLC.
+- No separate .NET SDK/runtime, Windows App SDK, FFmpeg or MediaInfo installation: the portable EXE includes its runtime components and metadata detector.
+- WEBP covers require a working Windows WEBP decoder; PNG/JPG are also supported.
+- The executable is unsigned. Check its SHA-256 before running. Hardware and HDR output quality are not guaranteed across all GPU, display, driver and VLC versions.
 
 ## Download and run
 
-1. Read and accept the [portable binary and third-party terms](BINARY-TERMS.md).
-2. From [Release v1.2.4](https://github.com/grishgun/AutoHDRManager/releases/tag/v1.2.4), download **AutoHDRManager.exe** and **SHA256SUMS.txt** into the same folder.
-3. Verify the checksum in PowerShell:
+1. Read the [portable binary and third-party terms](BINARY-TERMS.md).
+2. Download **AutoHDRManager.exe** and **SHA256SUMS.txt** from the [latest release](https://github.com/grishgun/AutoHDRManager/releases/latest).
+3. Compare the checksum in PowerShell:
 
-   ```powershell
-   (Get-FileHash .\AutoHDRManager.exe -Algorithm SHA256).Hash
-   Get-Content .\SHA256SUMS.txt
-   ```
+       (Get-FileHash .\AutoHDRManager.exe -Algorithm SHA256).Hash
+       Get-Content .\SHA256SUMS.txt
 
-   The hexadecimal values must match.
-4. Put the EXE in a stable folder and run it. For an update, exit the previous manager through its tray menu before replacing the file.
+4. Place the EXE in a convenient folder and open it. No installer or administrator rights are required.
 
-The single EXE extracts bundled runtime/assets into the normal .NET bundle cache. Settings, library, covers and logs are stored in `%LOCALAPPDATA%\AutoHDRManager`; shortcut infrastructure uses `%APPDATA%\AutoHDRManager`. Closing the window normally hides it in the tray. Use **Exit** in the tray or the library's `···` menu to stop the manager.
+The manager normally stays in the tray after its window closes. Use **Exit** to stop it. Settings, library, covers and logs are stored under %LOCALAPPDATA%\AutoHDRManager; stable shortcut/handler files use %APPDATA%\AutoHDRManager. Bundled components are extracted to the normal .NET bundle cache.
 
-## Add and launch a game
+## Add and launch HDR games
 
-Click **Add game** and select the actual game EXE, or choose a running process from an empty library. In the game's `···` menu, **Game settings** configures the name, tracked executable, launch method and arguments. Supported launch methods are a direct EXE, a custom executable command or a platform URI. Track the real game process rather than only a launcher.
+Choose **Add game**, then select the actual game EXE. Use the game's **Game settings** menu to set a different launcher or launch arguments when needed; track the actual game process, not only its launcher.
 
-Click the card's **HDR** button to prepare HDR and launch the game. If HDR cannot be confirmed, launch is stopped and an error is reported. Independently launched games may initialize graphics before background monitoring can enable HDR; use the HDR launch entry for pre-launch ordering.
+Click the card's **HDR** button. If HDR cannot be confirmed, the game is not launched and an error is shown. Background detection is also available, but a game launched elsewhere may initialize its graphics before monitoring enables HDR. Use the dedicated HDR launch for pre-launch ordering.
 
-To set a cover, use `···` → **Change cover**. PNG, JPG and WEBP are decoded and cached locally. SteamGridDB is optional and disabled by default; enabling it requires your own key in Settings. No Steam account or client is required for local game entries or local covers.
+Use **Change cover** in the game menu for local PNG/JPG/WEBP artwork. SteamGridDB is optional, disabled by default and requires your own key. Automatic keyless cover downloads are not included.
 
-## Pin an HDR launch to the taskbar
+### Taskbar HDR shortcuts
 
 1. Choose **Pin HDR launch to taskbar** in the game menu.
-2. The manager creates/reuses a standard `.lnk` and selects it in File Explorer.
-3. Right-click the link and choose **Pin to taskbar**, possibly under **Show more options**.
+2. The manager creates a standard shortcut and opens its location in Explorer.
+3. Right-click it and choose **Pin to taskbar**, possibly under **Show more options**.
 
-The app reports shortcut creation, not confirmed pinning. Clicking the pinned shortcut forwards `--launch-game <GameId>` through IPC to the existing manager, or starts one in the background. There is no second monitoring engine. After moving the portable EXE, run the new copy once to refresh the stable launcher; existing links retain their targets. Original Steam shortcuts and Windows' pinned-item database are not edited.
+The app confirms shortcut creation, not Windows pinning. The shortcut contacts the running manager or starts it in the background. Original Steam shortcuts are untouched.
 
-Windows Shell controls grouping. The HDR shortcut and the game's own window **can appear as two taskbar buttons**; 1.2.4 does not guarantee merging them. [Taskbar behavior and diagnostics](docs/TASKBAR.md).
+Windows may show the HDR shortcut and the running game as **separate taskbar buttons**. Merging them is not guaranteed. [Taskbar details](docs/TASKBAR.md).
 
-## Language and settings
+## Smart Video HDR
 
-The language picker is at the bottom of the expanded navigation pane and in Settings. **System** uses Russian for Russian Windows locales and English otherwise. Language, theme and grid/list changes apply immediately and persist. General/HDR settings use **Save**. Presentation changes do not restart the HDR engine or interrupt a session.
+Smart Video HDR is **off by default**. To enable ordinary double-click playback:
 
-Settings include startup, start minimized, close to tray, notifications, monitoring, display selection, enable/restore delays and optional covers. To preserve your existing configuration, replace only the EXE during an update.
+1. Install VLC and make sure the manager finds it, or select its executable in Settings.
+2. Enable **Smart Video HDR** in the **Video HDR** settings section. Keep automatic HDR management enabled.
+3. Click **Set up MKV/MP4 opening**.
+4. In Windows 11 Default Apps, select **Auto HDR Manager Video** for the extensions you want: MKV, MP4 or both.
+5. Open movies with a normal double click in Explorer.
+6. **Fully close the controlled VLC window/process after viewing** so the original HDR state can be restored.
 
-## Troubleshooting and limitations
+HDR10 and HLG are detected automatically. HDR is enabled and confirmed before VLC starts; SDR video does not turn it on. Games and HDR videos share the same session, so closing one does not restore HDR while another still needs it. Your manual HDR changes take priority.
 
-- **HDR unavailable:** use Diagnostics to read the active displays; check Windows HDR support, connection and driver. No guaranteed compatibility across all displays/GPUs is claimed.
-- **Game not tracked:** configure its actual executable, including a child shipping process if necessary. Launcher and tracked EXE may differ.
-- **HDR changed manually:** the manager yields ownership and avoids blindly undoing an observed manual change. Temporary display loss preserves the session. After game exit, a disconnected display can return within 10 minutes / 120 topology probes for verified restoration; ambiguous identity or an observed HDR mismatch prevents automatic writes. [Reconnect limits](docs/HDR-RECONNECT-RCA-1.2.4.md).
-- **No cover:** choose a local image. There is no automatic keyless online lookup in this version.
-- **Two taskbar buttons:** a known Windows Shell/launcher limitation; use read-only grouping diagnostics, not injected window changes.
-- **Report a bug:** use [Issues](https://github.com/grishgun/AutoHDRManager/issues). Logs and taskbar reports can contain private paths; redact them first. See [SECURITY.md](SECURITY.md) for private security reports.
+**Dolby Vision is not specifically supported.** A file with an explicitly compatible HDR10/HLG base layer may use that layer; Dolby Vision-only or ambiguous metadata does not enable HDR. Unrecognized metadata and HDR-preparation failures fall back to ordinary VLC playback in the current display state.
 
-There is no automatic updater. System/driver changes between the final HDR read and process startup cannot be eliminated. [Compatibility details](docs/HDR-COMPATIBILITY.md).
+MediaInfo is bundled; no separate metadata tools are needed. VLC's standard MKV/MP4 icons are preserved when VLC is available. The manager uses a separate controlled VLC instance and does not take over or close unrelated VLC windows. Keep the manager running during playback.
 
-## Build and tests
+To undo the file-handler choice, use **Choose VLC as the default app** or Windows Default Apps and select VLC for MKV/MP4. The manager never edits UserChoice directly. Disabling Smart Video HDR leaves its handler as a VLC passthrough until you choose a different default.
 
-On Windows x64, install the .NET SDK specified in `global.json`, then run:
+HDR output quality depends on VLC, the graphics driver and display; equal results on every system are not guaranteed. [Technical details and validation](docs/SMART-VIDEO-HDR.md).
 
-```powershell
-./scripts/build-release.ps1
-```
+## Update the portable version
 
-Output: `dist/AutoHDRManager.exe`. The script runs Core and Windows tests and verifies a single-file publish. `-Headless` skips only the physical-display read test for CI; it does not switch HDR. **122 tests passed** locally for this release (92 Core + 30 Windows, no skips). GitHub Actions builds and uploads artifacts; it does not publish releases automatically. [Build details](docs/BUILD-ENVIRONMENT.md) · [Architecture](docs/ARCHITECTURE.md) · [Contributing](CONTRIBUTING.md).
+1. Finish games and controlled videos; exit the old manager through its tray menu.
+2. Download and verify the new EXE, then replace the old file or move it to your preferred folder.
+3. Open the new EXE once from Explorer. It refreshes the existing stable launcher and registered video icon; game shortcuts retain their targets.
+4. Keep your application-data folders to preserve settings, library and covers.
 
-Windows Server GitHub Actions retains its existing `-WithoutWebpCodec` filter because its system WEBP decoder fails to initialize (0x88982F8B). CI runs 120 cases with two existing environment-specific exclusions: physical-display reading and one WEBP integration case. No new test exclusions were added for this hotfix; all 122 passed locally before release. Application WEBP support depends on an installed working Windows system decoder; PNG/JPG remain available.
+There is no automatic updater. No need to recreate HDR shortcuts or change your default video app on every update.
+
+## Language, troubleshooting and limits
+
+Choose **English**, **Русский** or **System** at the bottom of the expanded navigation pane or in Settings. System uses Russian for Russian Windows locales and English otherwise. Language, theme and grid/list changes apply immediately; other settings use **Save**.
+
+- **HDR unavailable:** check the display, connection and driver in Windows and the app's Diagnostics.
+- **Game not detected:** configure its real executable, including a child shipping process when necessary.
+- **HDR remains enabled:** fully close controlled VLC processes and tracked games. An initially enabled HDR state or a manual override may correctly keep it on.
+- **Monitor disconnected:** the original state is retained. Restoration after the last process exits is bounded to 10 minutes / 120 topology probes and requires reliable display identification. Ambiguous identity or an observed manual change prevents writes. [Safeguards](docs/HDR-RECONNECT-RCA-1.2.4.md).
+- **Old video icon:** close and reopen the Explorer folder after the manager refreshes its registration.
+- **Bug reports:** use [Issues](https://github.com/grishgun/AutoHDRManager/issues); redact private paths and logs first. Security reports: [SECURITY.md](SECURITY.md).
+
+## Validation and development
+
+**188/188 local automated tests passed**, including HDR ownership/reconnect regressions, game/video coordination, IPC, shortcuts and PNG/JPG/WEBP decoding. **17/17 user acceptance checks passed** on Windows 11 / MO34WQC2, covering HDR10, SDR, original HDR ON, reconnect, manual override, cold start, games with VLC, icons and version display.
+
+**HLG has automated coverage, but physical HLG playback has not been confirmed.** These checks do not establish compatibility with every monitor, GPU or reconnect scenario.
+
+Build on Windows with the SDK pinned in global.json:
+
+    ./scripts/build-release.ps1
+
+Output: dist/AutoHDRManager.exe. CI uses Windows 11 with an x64 SDK, runs WEBP decoding rather than excluding it, and validates the portable program with installed SDK paths temporarily unavailable on the disposable runner. Only the physical-display read test is omitted in headless CI; it passes in the full local suite. CI uploads artifacts and does not publish releases automatically.
+
+[GitHub Actions](https://github.com/grishgun/AutoHDRManager/actions) · [Testing](docs/TESTING.md) · [Build environment](docs/BUILD-ENVIRONMENT.md) · [Architecture](docs/ARCHITECTURE.md) · [Contributing](CONTRIBUTING.md)
 
 ## License
 
-Original project code, documentation, logo and original demo artwork: **[MIT](LICENSE)**, copyright (c) 2026 grishgun. Bundled dependencies retain their own licenses; see [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md) and [BINARY-TERMS.md](BINARY-TERMS.md). This project is not affiliated with Microsoft, Valve or any game publisher.
+Original code, documentation, logo and demonstration artwork: **[MIT](LICENSE)**, copyright (c) 2026 grishgun. Bundled components retain their own licenses: [Third-party notices](THIRD-PARTY-NOTICES.md) · [Binary terms](BINARY-TERMS.md). VLC is not bundled. This project is not affiliated with Microsoft, VideoLAN, Valve or game publishers.

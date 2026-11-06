@@ -1,7 +1,7 @@
 param([string]$Destination)
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
-if (!$Destination) { $Destination = Join-Path $projectRoot ('artifacts\github-source-1.3.0-rc.1-' + (Get-Date -Format 'yyyyMMdd-HHmmss')) }
+if (!$Destination) { $Destination = Join-Path $projectRoot ('artifacts\github-source-1.3.0-' + (Get-Date -Format 'yyyyMMdd-HHmmss')) }
 $exportRoot = [IO.Path]::GetFullPath($Destination)
 $artifactRoot = [IO.Path]::GetFullPath((Join-Path $projectRoot 'artifacts')) + [IO.Path]::DirectorySeparatorChar
 if (!$exportRoot.StartsWith($artifactRoot, [StringComparison]::OrdinalIgnoreCase)) { throw 'Export destination must be inside workspace artifacts.' }
@@ -11,7 +11,7 @@ $rootNames = @('README.md','README.ru.md','CHANGELOG.md','CONTRIBUTING.md','SECU
 $docNames = @('ARCHITECTURE.md','BRANDING.md','BUILD-ENVIRONMENT.md','DEPENDENCIES.md','HDR-COMPATIBILITY.md','TASKBAR.md','TASKBAR-GROUPING.md','TESTING.md','PUBLIC-RELEASE-1.2.3.md','HDR-RECONNECT-RCA-1.2.4.md','SMART-VIDEO-HDR.md','V1.3.0-RELEASE-NOTES.md')
 $files = @($rootNames | ForEach-Object { Get-Item -LiteralPath (Join-Path $projectRoot $_) })
 $files += @($docNames | ForEach-Object { Get-Item -LiteralPath (Join-Path $projectRoot ('docs\' + $_)) })
-foreach ($name in @('src','tests','scripts','.github','docs\licenses','docs\screenshots\1.2.3')) {
+foreach ($name in @('src','tests','scripts','.github','docs\licenses','docs\screenshots\1.2.3','docs\screenshots\1.3.0')) {
     $files += Get-ChildItem -LiteralPath (Join-Path $projectRoot $name) -File -Recurse -Force | Where-Object {
         $_.FullName -notmatch '\\(bin|obj|TestResults|Covers|Logs|Launcher|Shortcuts)\\' -and
         $_.Name -notmatch '^(settings|games|session)\.json|^cover-key\.bin$' -and

@@ -38,3 +38,6 @@ Language, theme and view changes save only presentation preferences and do not c
 
 ## External services and assets
 SteamGridDB is opt-in and requests static 600×900 covers. Keys use current-user DPAPI. Download limits and host checks stay in place. The application uses no WebView for its UI. Self-contained runtime dependencies and license notices are extracted by .NET from the single EXE; see THIRD-PARTY-NOTICES.md.
+
+## Smart Video HDR
+The opt-in video handler uses the same single-instance pipe and stable launcher. A bounded MediaInfo worker classifies metadata; a video demand reserves the existing HDR session before VLC dispatch. The existing runtime loop reaps exact controlled VLC process identities. Game and video demands share original state, manual override and reconnect handling. See [Smart Video HDR](SMART-VIDEO-HDR.md) for detection policy, process ownership and failure paths.

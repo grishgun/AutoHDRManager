@@ -1,6 +1,6 @@
 # Third-party notices
 
-## Smart Video HDR (1.3.0 local development)
+## Smart Video HDR (1.3.0)
 
 This product uses [MediaInfo](https://mediaarea.net/MediaInfo) library, Copyright (c) 2002–2025 MediaArea.net SARL. The unmodified 26.10 Windows x64 DLL is distributed under its BSD-style license. [License and embedded component notices](docs/licenses/MediaInfo) are included in the portable executable; [provenance, size and checksums](src/AutoHDRManager.Windows/Native/README.md) are recorded in source. These components retain their own licenses and are not relicensed under the project's MIT grant. VLC is discovered on the user's computer, not redistributed. FFmpeg is not part of the application.
 
@@ -14,7 +14,7 @@ The portable executable bundles .NET and Windows App SDK components under their 
 - Windows SDK build tools: build-only components under Windows SDK terms; the SDK itself is not redistributed as part of the source repository.
 - Segoe UI / Segoe Fluent Icons: referenced from Windows, no font files redistributed. WinUI supplies its own control resources under its package terms.
 - Application logo: reference-guided AI artwork, rights confirmed by the owner; no game artwork was used.
-- Public screenshots: actual 1.2.3 GUI, fictional Aurora/Orbit/Pulse entries and original abstract covers. No commercial game covers, extracted game icons or personal paths are published.
+- Public screenshots: actual 1.2.3 and 1.3.0 GUI, fictional Aurora/Orbit/Pulse entries and original abstract covers. No commercial game covers, extracted game icons or personal paths are published.
 - xUnit (Apache-2.0), test SDK and coverage tools (MIT): development-only NuGet references, not bundled with the application. Their metadata inventory is included in docs/DEPENDENCIES.md.
 
 MIT is compatible with retaining these distinct permissive/proprietary component licenses: it applies only to the project's own materials. Preserve all vendor notices and redistribution conditions when redistributing binaries. No GPL/AGPL component was identified in the application's declared dependency inventory.

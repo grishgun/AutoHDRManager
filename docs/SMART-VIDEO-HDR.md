@@ -1,6 +1,6 @@
-# Smart Video HDR — 1.3.0 release candidate
+# Smart Video HDR — 1.3.0
 
-Local release candidate only. Stable GitHub v1.2.4 is unchanged; no 1.3.0 release or tag is published.
+Stable 1.3.0 adds video management to the existing game engine. [English setup guide](../README.md#smart-video-hdr) · [Русская инструкция](../README.ru.md#автоматический-hdr-для-видео--smart-video-hdr).
 
 ## Scope and architecture
 
@@ -26,7 +26,7 @@ Primary references: [MediaInfo license](https://mediaarea.net/en/MediaInfo/Licen
 
 Реальные переключения HDR и изменение ассоциаций агентом требуют отдельного разрешения. Автоматические тесты используют имитацию HDR, чтение дисплея и изолированные временные файлы; регистрацию в реестре они не выполняют.
 
-1. Завершите игру и прежний менеджер через «Выход». Запустите `dist/1.3.0-local.1/AutoHDRManager.exe`. Оставьте автоматическое управление HDR включённым. В настройках **Video HDR** включите **Smart Video HDR**; проверьте, что VLC найден, либо выберите `vlc.exe`.
+1. Завершите игру и прежний менеджер через «Выход». Запустите `AutoHDRManager.exe`. Оставьте автоматическое управление HDR включённым. В настройках **Video HDR** включите **Smart Video HDR**; проверьте, что VLC найден, либо выберите `vlc.exe`.
 2. Нажмите **Настроить открытие MKV/MP4**. В открывшихся параметрах Windows выберите **Auto HDR Manager Video** для `.mkv` и `.mp4`. Это единственный ручной выбор обработчика; UserChoice изменяет сама Windows.
 3. При исходном HDR OFF откройте известный HDR10-фильм двойным кликом. Ожидается HDR ON с подтверждением, пауза 1 секунда, затем VLC. Полностью закройте VLC: ожидается HDR OFF. Повторите с HLG при наличии файла.
 4. Откройте известный SDR-фильм: VLC запускается без изменения HDR. При исходном HDR ON закройте HDR-фильм — HDR должен остаться ON.
@@ -42,14 +42,14 @@ Primary references: [MediaInfo license](https://mediaarea.net/en/MediaInfo/Licen
 - Native MediaInfo tested with six original tiny HEVC files (PQ/HLG/SDR × MKV/MP4), plus corrupt and incomplete containers. Test fixture generation tools are not shipped.
 - Unit coverage includes original HDR ON, manual overrides, discovery/probe/start failures, existing VLC, repeated requests, independent video demands, game/video coexistence, cancellation/pause, disabling the feature and reconnect during/after video exit.
 - Windows tests exercise the real IPC pipe, safe argument construction, read-only registry-plan validation and stable launcher replacement in a temporary directory. They do not write real file associations.
-- User acceptance of 1.3.0-local.1: 17/17 checks passed, covering HDR10, SDR, original HDR ON, monitor reconnect, manual override, cold start and game/VLC coexistence on Windows 11 / MO34WQC2. This does not establish physical coverage of every format, driver or reconnect scenario. Final RC visual acceptance is pending.
+- User acceptance of 1.3.0-local.1: 17/17 checks passed, covering HDR10, SDR, original HDR ON, monitor reconnect, manual override, cold start and game/VLC coexistence on Windows 11 / MO34WQC2. This does not establish physical coverage of every format, driver or reconnect scenario. The user also accepted the RC, including VLC icons and the version label. HLG has automated coverage but no confirmed physical playback test.
 
-## Release candidate polish
+## Version and file icons
 
-The UI shows only vMAJOR.MINOR.PATCH, derived from the application assembly version. Logs and diagnostics retain the complete informational version, including rc and source revision.
+The UI shows only vMAJOR.MINOR.PATCH, derived from the application assembly version. The stable release uses 1.3.0 in diagnostic metadata, without local, rc or source-revision suffixes.
 
 The video ProgID uses the installed/configured VLC executable's standard icon (index 0). Without VLC it uses original bundled video artwork, extracted to the stable Launcher directory. Existing registrations refresh only their DefaultIcon and notify Shell with SHCNE_ASSOCCHANGED; UserChoice and the open command are preserved. Explorer may repaint asynchronously; close and reopen the folder if its existing view remains stale. No icon-cache deletion or Explorer restart is performed.
 
-RC verification on the real profile: DefaultIcon updated to VLC; Shell-rendered MKV and MP4 icons matched the VLC executable icon byte-for-byte. UserChoice values and hashes, the open command, the stable launcher and both existing game shortcuts remained unchanged. The complete solution built with zero warnings/errors. The safe UI displayed v1.3.0 in light/dark themes; its log retained the rc suffix and source revision. The single-file metadata worker classified all six fixtures with SDK paths removed and an invalid DOTNET_ROOT. This is an isolation smoke test on the development host, not a clean-VM certification. MediaInfo's extracted SHA-256 and license bundle matched the audited input.
+RC verification on the real profile: DefaultIcon updated to VLC; Shell-rendered MKV and MP4 icons matched the VLC executable icon byte-for-byte. UserChoice values and hashes, the open command, the stable launcher and both existing game shortcuts remained unchanged. The complete solution built with zero warnings/errors. The safe UI displayed v1.3.0 in light/dark themes; its RC log retained the candidate suffix and source revision (stable release metadata is 1.3.0). The single-file metadata worker classified all six fixtures with SDK paths removed and an invalid DOTNET_ROOT. This is an isolation smoke test on the development host, not a clean-VM certification. MediaInfo's extracted SHA-256 and license bundle matched the audited input.
 
 Shell references: [DefaultIcon](https://learn.microsoft.com/en-us/windows/win32/shell/how-to-assign-a-custom-icon-to-a-file-type) and [SHChangeNotify](https://learn.microsoft.com/en-us/windows/win32/api/shlobj_core/nf-shlobj_core-shchangenotify).

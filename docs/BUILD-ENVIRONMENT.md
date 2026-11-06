@@ -8,9 +8,9 @@ Run `./scripts/build-release.ps1` to test and publish `dist/AutoHDRManager.exe`.
 
 The portable publish uses SelfContained, WindowsAppSDKSelfContained, PublishSingleFile and IncludeAllContentForSelfExtract, with embedded symbols and no trimming/AOT. Source document paths in symbols are mapped to `/_/` to avoid publishing local workspace paths. Original MIT and vendor notices are embedded. The bundle runtime extracts its components on execution; this is not a zero-disk-footprint application.
 
-A network-enabled restore and vulnerability check succeeded for public 1.2.3 preparation. No vulnerable application packages were reported at that time. A clean Windows VM has not been tested.
+A network-enabled restore and vulnerability check succeeded for public 1.2.3 preparation. No vulnerable application packages were reported at that time. Hosted Windows 11 CI validates the portable smoke path with installed SDK directories unavailable; this is not a broad hardware compatibility certification.
 
 For GUI checks, use `--safe --ui-test-root <absolute-path>` with fictional data. Safe mode forbids HDR writes. Never use production settings, logs, extracted game icons or copyrighted covers for public screenshots. `scripts/export-source.ps1` uses an allowlist to exclude runtime state and private validation artifacts.
 
 
-Windows Server GitHub Actions also uses `-WithoutWebpCodec` because its system WEBP decoder fails to initialize (0x88982F8B). CI runs 84 cases with two explicit exclusions: physical-display reading and one WEBP integration case. All 86 passed locally before release. Application WEBP support depends on an installed working Windows system decoder; PNG/JPG remain available.
+CI uses Windows 11 Arm64 with an x64 SDK and executes the x64 tests/application through emulation. WEBP decoding is mandatory; only the physical-display read test is omitted in headless CI. An additional disposable-runner stage isolates installed SDK directories, confirms empty SDK enumeration and validates safe WinUI startup plus all six video fixtures from the portable EXE. See TESTING.md for exact scope.
