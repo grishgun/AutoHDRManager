@@ -46,8 +46,8 @@ public sealed class AppRuntime
         Engine = new(Hdr, new SessionRepository(Root), notifications, Log, Settings);
         Launcher = new(Engine, Monitor, () => Games, GameLauncher.Launch, Log);
         Video = new(Engine, Monitor, () => Games, Settings, new MediaInfoVideoProbe(), VideoPlayer, Log, notifications);
-        VideoAssociations = new(Shortcuts);
-        Log.Write("ApplicationStarted", new { SafeMode, Version = "1.3.0-local.1", OS = Environment.OSVersion.Version.ToString() });
+        VideoAssociations = new(Shortcuts, () => VideoPlayer.Find(Settings.VlcPath));
+        Log.Write("ApplicationStarted", new { SafeMode, Version = AppVersion.Current.Diagnostic, OS = Environment.OSVersion.Version.ToString() });
     }
     public void ApplyLanguage() => Localization.SetLanguage(Settings.Language, global::Windows.System.UserProfile.GlobalizationPreferences.Languages.FirstOrDefault() ?? System.Globalization.CultureInfo.CurrentUICulture.Name);
     public List<Game> Games { get { lock (libraryLock) return library.Select(g => g with { }).ToList(); } }

@@ -29,7 +29,7 @@ public sealed class VideoIntegrationTests : IDisposable
     }
     [Fact] public void AssociationPlanOnlyAddsUserCapabilitiesAndOpenWithWithoutChangingDefaults()
     {
-        var values = VideoAssociations.Registration(@"C:\Users\Example\AppData\Roaming\AutoHDRManager\Launcher\AutoHDRManager.exe");
+        var values = VideoAssociations.Registration(@"C:\Users\Example\AppData\Roaming\AutoHDRManager\Launcher\AutoHDRManager.exe", "video.ico,0");
         Assert.All(values, value => { Assert.StartsWith("Software\\", value.Key); Assert.DoesNotContain("UserChoice", value.Key); Assert.DoesNotContain(@"Explorer\FileExts", value.Key); });
         Assert.DoesNotContain(values, value => value.Key is @"Software\Classes\.mkv" or @"Software\Classes\.mp4");
         Assert.Equal("\"C:\\Users\\Example\\AppData\\Roaming\\AutoHDRManager\\Launcher\\AutoHDRManager.exe\" --open-video \"%1\"", Assert.Single(values, v => v.Key.EndsWith(@"shell\open\command")).Value);
@@ -38,9 +38,9 @@ public sealed class VideoIntegrationTests : IDisposable
     [Fact] public void AssociationStableTargetUpdatesAfterPortableMoveWithoutChangingCommand()
     {
         string original = Path.Combine(root, "first.exe"), moved = Path.Combine(root, "new.exe"), data = Path.Combine(root, "data"); File.WriteAllText(original, "first");
-        var shortcuts = new GameShortcuts(data, original); shortcuts.EnsureLauncher(); var before = VideoAssociations.Registration(shortcuts.Launcher);
+        var shortcuts = new GameShortcuts(data, original); shortcuts.EnsureLauncher(); var before = VideoAssociations.Registration(shortcuts.Launcher, "video.ico,0");
         File.Move(original, moved); File.WriteAllText(moved, "second"); var updated = new GameShortcuts(data, moved); updated.EnsureLauncher();
-        Assert.Equal(before, VideoAssociations.Registration(updated.Launcher)); Assert.Equal("second", File.ReadAllText(shortcuts.Launcher));
+        Assert.Equal(before, VideoAssociations.Registration(updated.Launcher, "video.ico,0")); Assert.Equal("second", File.ReadAllText(shortcuts.Launcher));
     }
     [Theory][InlineData(16, 9, 10, VideoKind.Unknown)][InlineData(18, 9, 10, VideoKind.Unknown)][InlineData(1, 1, 8, VideoKind.Sdr)][InlineData(0, 0, 0, VideoKind.Unknown)]
     public void MatroskaHeaderWithoutCodedDepthCannotConfirmHdr(int transfer, int primary, int depth, VideoKind expected)

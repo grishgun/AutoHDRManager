@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup><TargetFramework>net10.0-windows10.0.26100.0</TargetFramework><AllowUnsafeBlocks>true</AllowUnsafeBlocks><SupportedOSPlatformVersion>10.0.22000.0</SupportedOSPlatformVersion></PropertyGroup>
   <ItemGroup><ProjectReference Include="../AutoHDRManager.Core/AutoHDRManager.Core.csproj" /></ItemGroup>
+  <ItemGroup><EmbeddedResource Include="Assets/Video.ico" LogicalName="AutoHDRManager.Windows.Video.ico" /></ItemGroup>
   <ItemGroup><Content Include="Native/MediaInfo.dll" Link="MediaInfo.dll" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" /></ItemGroup>
   <Target Name="VerifyMediaInfo" BeforeTargets="BeforeBuild">
     <GetFileHash Files="$(MSBuildProjectDirectory)/Native/MediaInfo.dll" Algorithm="SHA256"><Output TaskParameter="Items" ItemName="MediaInfoHash" /></GetFileHash>

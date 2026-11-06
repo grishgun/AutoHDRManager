@@ -57,6 +57,7 @@ public sealed class GameViewModel(Game game) : Observable
 public sealed class MainViewModel : Observable
 {
     public AppRuntime Runtime { get; }
+    public string DisplayVersion => AppVersion.Current.Display;
     public ObservableCollection<GameViewModel> Games { get; } = [];
     public ObservableCollection<GameViewModel> FilteredGames { get; } = [];
     private string search = "";
@@ -194,7 +195,7 @@ public sealed class MainViewModel : Observable
     }
     public string DiagnosticReport() => JsonSerializer.Serialize(new
     {
-        Version = "1.3.0-local.1", OS = Environment.OSVersion.Version.ToString(), Runtime.SafeMode, Language = Localization.Language, Theme = Runtime.Settings.Theme,
+        Version = AppVersion.Current.Diagnostic, OS = Environment.OSVersion.Version.ToString(), Runtime.SafeMode, Language = Localization.Language, Theme = Runtime.Settings.Theme,
         HDR = HdrStatus, State = EngineStatus, Monitoring = Runtime.Settings.Monitoring,
         Displays = Displays.Select(d => new { d.Name, d.Supported, d.Enabled, d.Active, d.ModernApi, d.Flags }),
         Games = Games.Count, StructureSizes = WindowsHdrController.StructureSizes

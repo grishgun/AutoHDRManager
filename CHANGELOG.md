@@ -1,11 +1,12 @@
-﻿# Changelog
+# Changelog
 
-## 1.3.0-local.1 — local development, not published
+## 1.3.0-rc.1 — local release candidate, not published
 
 - Opt-in Smart Video HDR for MKV/MP4 opened in VLC: bundled, bounded MediaInfo metadata probing; HDR10/HLG preparation and confirmation before player dispatch; SDR/unknown passthrough.
 - Reuse the existing IPC, stable launcher and HDR session engine. Exact owned VLC process lifetimes coexist with games without changing the 1.2.4 reconnect algorithm or manual override safeguards.
 - Add explicit per-user handler registration and Windows Default Apps navigation; no UserChoice writes or automatic default changes. Compact RU/EN settings block, off by default.
-- 180 automated tests pass, including all previous 122. Physical HDR/Explorer association acceptance remains pending. [Design, validation and manual checklist](docs/SMART-VIDEO-HDR.md).
+- Show v1.3.0 from assembly metadata in the navigation header and About page while preserving full diagnostic build identity. Use VLC video file icons through DefaultIcon, with original video artwork as fallback and Shell cache notification.
+- 188 automated tests pass, including all 180 accepted development-build tests. User acceptance of 1.3.0-local.1: 17/17 checks passed; final RC visual acceptance is pending. [Design, validation and manual checklist](docs/SMART-VIDEO-HDR.md).
 
 ## 1.2.4 — 2026-11-06
 
