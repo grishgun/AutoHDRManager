@@ -2,8 +2,6 @@
 $ErrorActionPreference = 'Stop'
 if ($env:GITHUB_ACTIONS -ne 'true' -or $env:RUNNER_ENVIRONMENT -ne 'github-hosted') { throw 'Requires an ephemeral GitHub-hosted runner' }
 . (Join-Path $PSScriptRoot 'environment.ps1')
-& $Dotnet build-server shutdown
-if ($LASTEXITCODE -ne 0) { throw 'Build servers did not stop' }
 $dotnetRoots = @($env:ProgramFiles, [Environment]::GetEnvironmentVariable('ProgramFiles(x86)'), (Join-Path $ProjectRoot '.tools')) | Where-Object { $_ } | ForEach-Object { [IO.Path]::GetFullPath((Join-Path $_ 'dotnet')).TrimEnd('\') }
 $allowedParents = @($dotnetRoots) + @($dotnetRoots | ForEach-Object { Join-Path $_ 'x64' })
 $roots = @($allowedParents | ForEach-Object { Join-Path $_ 'sdk' } | Where-Object { Test-Path -LiteralPath $_ })
